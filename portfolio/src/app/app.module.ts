@@ -14,6 +14,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HeaderComponent } from './header/header.component';
 import { NzPageHeaderModule } from 'ng-zorro-antd/page-header';
 import { NzBreadCrumbModule } from 'ng-zorro-antd/breadcrumb';
+import { NzSpaceModule } from 'ng-zorro-antd/space';
+import { NzButtonModule } from 'ng-zorro-antd/button';
 
 
 registerLocaleData(en);
@@ -31,7 +33,9 @@ registerLocaleData(en);
     HttpClientModule,
     NzPageHeaderModule,
     BrowserAnimationsModule,
-    NzBreadCrumbModule
+    NzBreadCrumbModule,
+    NzSpaceModule,
+    NzButtonModule
   ],
   // exports:[
   //   NzPageHeaderModule
