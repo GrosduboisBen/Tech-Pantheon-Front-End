@@ -16,6 +16,10 @@ import { NzPageHeaderModule } from 'ng-zorro-antd/page-header';
 import { NzBreadCrumbModule } from 'ng-zorro-antd/breadcrumb';
 import { NzSpaceModule } from 'ng-zorro-antd/space';
 import { NzButtonModule } from 'ng-zorro-antd/button';
+import { NzDrawerModule } from 'ng-zorro-antd/drawer';
+import { SideMenuComponent } from './side-menu/side-menu.component';
+import { NzTabsModule } from 'ng-zorro-antd/tabs';
+
 
 
 registerLocaleData(en);
@@ -24,7 +28,8 @@ registerLocaleData(en);
   declarations: [
     AppComponent,
     HomeComponent,
-    HeaderComponent
+    HeaderComponent,
+    SideMenuComponent
   ],
   imports: [
     BrowserModule,
@@ -35,7 +40,9 @@ registerLocaleData(en);
     BrowserAnimationsModule,
     NzBreadCrumbModule,
     NzSpaceModule,
-    NzButtonModule
+    NzButtonModule,
+    NzDrawerModule,
+    NzTabsModule
   ],
   // exports:[
   //   NzPageHeaderModule
