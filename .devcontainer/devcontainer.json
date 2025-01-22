@@ -1,0 +1,22 @@
+{
+  "name": "Angular Dev Container",
+  "dockerComposeFile": "../docker-compose.yml",
+  "service": "portfolio-manager-frontend",
+  "workspaceFolder": "/workspace",
+  "settings": {
+    "terminal.integrated.defaultProfile.linux": "/bin/bash"
+  },
+  "devDependencies": {
+  "@angular-devkit/build-angular": "^15.0.0", // Remplacez par la version correcte pour votre projet
+  "@angular/cli": "^15.0.0",
+  "@angular/compiler-cli": "^15.0.0",
+  "typescript": "^4.8.4"
+},
+  "extensions": [
+    "angular.ng-template",        // Extension Angular Language Service
+    "dbaeumer.vscode-eslint" ,    // Extension ESLint
+    "eamodio.gitlens"
+  ],
+  // "postCreateCommand": "npm install",
+  "remoteUser": "node"
+}

@@ -1,0 +1,12 @@
+version: "3.9"
+
+services:
+  portfolio-manager-frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - .:/workspace:cached
+    ports:
+      - "4200:4200"
+    command: ["ng", "serve", "--host", "0.0.0.0", "--disable-host-check"]
