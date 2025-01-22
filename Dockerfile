@@ -1,0 +1,25 @@
+# Utiliser une image Node.js (LTS recommandé pour Angular)
+FROM node:20
+
+RUN apt-get update && apt-get install -y \
+    build-essential \
+    libpq-dev \
+    git \
+    curl \
+    && apt-get clean
+# Installer Angular CLI globalement
+RUN npm install -g @angular/cli
+RUN npm install -g @angular-devkit/build-angular
+
+# RUN useradd -m vscode
+# USER vscode
+# Définir le répertoire de travail
+WORKDIR /workspace
+
+# # Ajouter un utilisateur non-root
+# RUN useradd -ms /bin/bash devuser
+# USER devuser
+
+# Exposer le port utilisé par Angular
+EXPOSE 4200
+# ENV PATH="${HOME_DIR}/.local/bin:${PATH}"
