@@ -11,7 +11,8 @@ RUN apt-get update && apt-get install -y \
 RUN npm install -g @angular/cli
 RUN npm install -g @angular-devkit/build-angular
 RUN npm install -g eslint @angular-eslint/eslint-plugin @angular-eslint/eslint-plugin-template @angular-eslint/template-parser
-RUN npx ng add @angular-eslint/schematics
+# RUN npx ng add @angular-eslint/schematics
+# TODO : Fix npx command ( wrong path to access ng cli)
 RUN npm install -g prettier eslint-config-prettier eslint-plugin-prettier
 
 
