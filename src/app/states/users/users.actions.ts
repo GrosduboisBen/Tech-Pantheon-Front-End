@@ -1,25 +1,16 @@
 import { createAction, props } from '@ngrx/store';
-import { UserResponse } from 'src/services';
+import { UserListResponse } from 'src/services';
+export const loadUsers = createAction(
+  '[User API] Load Users',
+  props<{ page?: number; pageSize?: number }>() // ✅ Paramètres optionnels
+);
 
-export const loadUsers = createAction('[User API] Load Users');
 export const loadUsersSuccess = createAction(
   '[User API] Load Users Success',
-  props<{ users: UserResponse[] }>()
-);
-export const loadUsersFailure = createAction(
-  '[User API] Load Users Failure',
-  props<{ error: string }>()
+  props<{ users: UserListResponse }>()
 );
 
-export const addUser = createAction(
-  '[User Page] Add User',
-  props<{ user: UserResponse }>()
-);
-export const updateUser = createAction(
-  '[User Page] Update User',
-  props<{ user: UserResponse }>()
-);
-export const deleteUser = createAction(
-  '[User Page] Delete User',
-  props<{ id: string }>()
+export const loadUsersFailure = createAction(
+  '[User API] Load Users Failure',
+  props<{ error: any }>()
 );

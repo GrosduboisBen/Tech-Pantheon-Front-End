@@ -12,15 +12,20 @@ export class UserEffects {
     private userService: UsersApi
   ) {}
 
-  //   loadUsers$ = createEffect(() =>
-  //     this.actions$.pipe(
-  //       ofType(UserActions.loadUsers),
-  //       mergeMap(() =>
-  //         this.userService.getUsers().pipe(
-  //           map(users => UserActions.loadUsersSuccess({ users })),
-  //           catchError(error => of(UserActions.loadUsersFailure({ error })))
-  //         )
-  //       )
-  //     )
-  //   );
+  loadUsers$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(UserActions.loadUsers), // Récupération de l'action NgRx
+      mergeMap(action =>
+        this.userService
+          .readUsersApiUsersGet({
+            page: action.page ?? undefined,
+            pageSize: action.pageSize ?? undefined,
+          })
+          .pipe(
+            map(users => UserActions.loadUsersSuccess({ users })),
+            catchError(error => of(UserActions.loadUsersFailure({ error })))
+          )
+      )
+    )
+  );
 }
