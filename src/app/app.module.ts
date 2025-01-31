@@ -19,8 +19,12 @@ import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzDrawerModule } from 'ng-zorro-antd/drawer';
 import { SideMenuComponent } from './side-menu/side-menu.component';
 import { NzTabsModule } from 'ng-zorro-antd/tabs';
+import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
-
+import { userReducer } from './states/users/users.reducers';
+import { UserEffects } from './states/users/users.effects';
 
 registerLocaleData(en);
 
@@ -29,7 +33,7 @@ registerLocaleData(en);
     AppComponent,
     HomeComponent,
     HeaderComponent,
-    SideMenuComponent
+    SideMenuComponent,
   ],
   imports: [
     BrowserModule,
@@ -42,14 +46,15 @@ registerLocaleData(en);
     NzSpaceModule,
     NzButtonModule,
     NzDrawerModule,
-    NzTabsModule
+    NzTabsModule,
+    StoreModule.forRoot({ users: userReducer }),
+    EffectsModule.forRoot([UserEffects]),
+    StoreDevtoolsModule.instrument({ maxAge: 25 }),
   ],
   // exports:[
   //   NzPageHeaderModule
   // ],
-  providers: [
-    { provide: NZ_I18N, useValue: en_US }
-  ],
-  bootstrap: [AppComponent]
+  providers: [{ provide: NZ_I18N, useValue: en_US }],
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
