@@ -12,23 +12,14 @@
  */
 
 /**
+ * 
  * @export
- * @interface MilestoneUpdate
+ * @enum {string}
  */
-export interface MilestoneUpdate {
-    /**
-     * @type {string}
-     * @memberof MilestoneUpdate
-     */
-    title: string | null;
-    /**
-     * @type {string}
-     * @memberof MilestoneUpdate
-     */
-    description: string | null;
-    /**
-     * @type {string}
-     * @memberof MilestoneUpdate
-     */
-    project_id: string | null;
+export enum ProjectStatusEnum {
+    Proposed = 'proposed',
+    InProgress = 'in_progress',
+    Completed = 'completed',
+    Cancelled = 'cancelled'
 }
+
