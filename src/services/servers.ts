@@ -1,5 +1,5 @@
 export const API_CONFIG = {
-  basePath: 'https://localhost:8000/', // Remplace par l'URL réelle de ton API
+  basePath: 'http://localhost:8000', // Remplace par l'URL réelle de ton API
 };
 
 // ServerConfiguration reste le même, il utilise `API_CONFIG` pour l'URL
