@@ -23,10 +23,11 @@ import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
-import { userReducer } from './states/users/users.reducers';
-import { UserEffects } from './states/users/users.effects';
+import { userReducer } from '../services/states/users/users.reducers';
+import { UserEffects } from '../services/states/users/users.effects';
 import { UsersApi } from 'src/services'; // Importer le service UsersApi
-import { API_CONFIG } from 'src/services/servers'; // Importer la configuration de l'API
+import { API_CONFIG } from 'src/services/servers';
+import { UsersComponent } from './components/users/users.component'; // Importer la configuration de l'API
 
 registerLocaleData(en);
 
@@ -36,6 +37,7 @@ registerLocaleData(en);
     HomeComponent,
     HeaderComponent,
     SideMenuComponent,
+    UsersComponent,
   ],
   imports: [
     BrowserModule,
