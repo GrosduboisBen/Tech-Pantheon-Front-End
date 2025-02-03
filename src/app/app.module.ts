@@ -25,6 +25,8 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 import { userReducer } from './states/users/users.reducers';
 import { UserEffects } from './states/users/users.effects';
+import { UsersApi } from 'src/services'; // Importer le service UsersApi
+import { API_CONFIG } from 'src/services/servers'; // Importer la configuration de l'API
 
 registerLocaleData(en);
 
@@ -51,10 +53,11 @@ registerLocaleData(en);
     EffectsModule.forRoot([UserEffects]),
     StoreDevtoolsModule.instrument({ maxAge: 25 }),
   ],
-  // exports:[
-  //   NzPageHeaderModule
-  // ],
-  providers: [{ provide: NZ_I18N, useValue: en_US }],
+  providers: [
+    { provide: NZ_I18N, useValue: en_US },
+    UsersApi, // Ajouter UsersApi ici
+    { provide: 'API_CONFIG', useValue: API_CONFIG }, // Fournir la configuration de l'API
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
