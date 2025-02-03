@@ -1,5 +1,3 @@
-/* tslint:disable */
-/* eslint-disable */
 export * from './AvailabilityCalendarCreate';
 export * from './AvailabilityCalendarListResponse';
 export * from './AvailabilityCalendarResponse';
@@ -40,6 +38,7 @@ export * from './PricingUpdate';
 export * from './ProjectCreate';
 export * from './ProjectListResponse';
 export * from './ProjectResponse';
+export * from './ProjectStatusEnum';
 export * from './ProjectUpdate';
 export * from './RoleCreate';
 export * from './RoleListResponse';

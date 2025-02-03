@@ -19,8 +19,15 @@ import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzDrawerModule } from 'ng-zorro-antd/drawer';
 import { SideMenuComponent } from './side-menu/side-menu.component';
 import { NzTabsModule } from 'ng-zorro-antd/tabs';
+import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
-
+import { userReducer } from '../services/states/users/users.reducers';
+import { UserEffects } from '../services/states/users/users.effects';
+import { UsersApi } from 'src/services'; // Importer le service UsersApi
+import { API_CONFIG } from 'src/services/servers';
+import { UsersComponent } from './components/users/users.component'; // Importer la configuration de l'API
 
 registerLocaleData(en);
 
@@ -29,7 +36,8 @@ registerLocaleData(en);
     AppComponent,
     HomeComponent,
     HeaderComponent,
-    SideMenuComponent
+    SideMenuComponent,
+    UsersComponent,
   ],
   imports: [
     BrowserModule,
@@ -42,14 +50,16 @@ registerLocaleData(en);
     NzSpaceModule,
     NzButtonModule,
     NzDrawerModule,
-    NzTabsModule
+    NzTabsModule,
+    StoreModule.forRoot({ users: userReducer }),
+    EffectsModule.forRoot([UserEffects]),
+    StoreDevtoolsModule.instrument({ maxAge: 25 }),
   ],
-  // exports:[
-  //   NzPageHeaderModule
-  // ],
   providers: [
-    { provide: NZ_I18N, useValue: en_US }
+    { provide: NZ_I18N, useValue: en_US },
+    UsersApi, // Ajouter UsersApi ici
+    { provide: 'API_CONFIG', useValue: API_CONFIG }, // Fournir la configuration de l'API
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

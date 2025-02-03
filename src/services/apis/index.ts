@@ -1,5 +1,3 @@
-/* tslint:disable */
-/* eslint-disable */
 export * from './CalendarsApi';
 export * from './CustomBlocksApi';
 export * from './FeedBacksApi';
