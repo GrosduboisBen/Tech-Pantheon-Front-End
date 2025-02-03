@@ -7,10 +7,7 @@ services:
       dockerfile: Dockerfile
     volumes:
       - .:/workspace:cached
-      - angular_cache:/home/node/.angular/cache
     ports:
       - "4200:4200"
     command: ["ng", "serve", "--host", "0.0.0.0", "--disable-host-check"]
-volumes:
-  angular_cache:
-    driver: local
+

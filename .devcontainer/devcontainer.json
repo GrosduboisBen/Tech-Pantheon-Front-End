@@ -2,7 +2,7 @@
   "name": "Angular Dev Container",
   "dockerComposeFile": "../docker-compose.yml",
   "service": "portfolio-manager-frontend",
-  "workspaceFolder": "/workspace",
+  "workspaceFolder": "./workspace",
   "settings": {
     "terminal.integrated.defaultProfile.linux": "/bin/bash"
   },
