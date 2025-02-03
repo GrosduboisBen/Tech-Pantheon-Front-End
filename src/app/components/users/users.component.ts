@@ -15,7 +15,7 @@ import { UserState } from 'src/services/states/users/users.reducers';
   styleUrls: ['./users.component.scss'],
 })
 export class UsersComponent implements OnInit {
-  users$: Observable<UserResponse[]> = new Observable<UserResponse[]>(); // Initialiser avec un Observable vide
+  users$: Observable<UserResponse[]> = new Observable<UserResponse[]>();
   loading$: Observable<boolean> = new Observable<boolean>();
 
   constructor(private store: Store<UserState>) {}
