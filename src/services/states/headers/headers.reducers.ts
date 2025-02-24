@@ -3,8 +3,8 @@ import * as HeadersActions from './headers.actions';
 
 export interface HeaderState {
   title: string;
-  subTitle: string;
   loading: boolean;
+  subTitle: string;
 }
 
 export const initialState: HeaderState = {

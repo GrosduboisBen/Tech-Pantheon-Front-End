@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
-import { Actions, createEffect } from '@ngrx/effects';
+import { Actions, createEffect, ofType } from '@ngrx/effects';
 import * as HeadersActions from './headers.actions';
+import * as UserActions from '../users/users.actions';
 import { select, Store } from '@ngrx/store';
 import { UserState } from '../users/users.reducers';
 import { HeaderState } from './headers.reducers';
-import { map, withLatestFrom } from 'rxjs';
+import { distinctUntilChanged, map, withLatestFrom } from 'rxjs';
 
 @Injectable()
 export class HeadersEffects {
@@ -16,14 +17,20 @@ export class HeadersEffects {
   // Effet pour charger tous les utilisateurs
   setTitle$ = createEffect(() =>
     this.actions$.pipe(
-      // TODO use a "currentUser" property.
-      withLatestFrom(this.store.pipe(select(state => state.users.users[0]))),
+      ofType(UserActions.loadUsersSuccess),
+      withLatestFrom(
+        this.store.pipe(
+          select(state => state.users.users[0]),
+          distinctUntilChanged(
+            (prev, curr) =>
+              prev?.name === curr?.name && prev?.email === curr?.email
+          )
+        )
+      ),
       map(([_, user]) => {
-        const title = user.name;
-        const subTitle = user.email;
         return HeadersActions.setHeaderTitle({
-          title: title,
-          subTitle: subTitle,
+          title: user.name || '',
+          subTitle: user.email || '',
         });
       })
     )

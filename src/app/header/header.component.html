@@ -1,5 +1,8 @@
 
-    <nz-page-header class="site-page-header" nzTitle="Title" nzSubtitle="This is a subtitle">
+    <nz-page-header 
+      class="site-page-header" 
+      [nzTitle]="(title$ | async) ?? ''"
+      [nzSubtitle]="(subTitle$ | async) ?? ''">
       <nz-page-header-extra>
         <nz-space>
         </nz-space>
