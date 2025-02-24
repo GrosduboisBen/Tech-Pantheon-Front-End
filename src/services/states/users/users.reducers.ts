@@ -1,6 +1,6 @@
 import { createReducer, on } from '@ngrx/store';
-import { UserResponse } from 'src/services';
 import * as UserActions from './users.actions';
+import { UserResponse } from '../../models';
 
 export interface UserState {
   users: UserResponse[]; // Tableau des utilisateurs

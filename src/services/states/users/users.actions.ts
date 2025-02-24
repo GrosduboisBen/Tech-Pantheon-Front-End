@@ -1,10 +1,10 @@
 import { createAction, props } from '@ngrx/store';
 import {
   UserCreate,
-  UserUpdate,
-  UserResponse,
   UserListResponse,
-} from 'src/services';
+  UserResponse,
+  UserUpdate,
+} from '../../models';
 
 // Action pour charger tous les utilisateurs
 export const loadUsers = createAction(
