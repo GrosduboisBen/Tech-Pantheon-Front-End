@@ -5,7 +5,6 @@ import {
   createNavigationList,
 } from '../utils/menu-utils/interfaces';
 import { Router } from '@angular/router';
-import { NzTabChangeEvent } from 'ng-zorro-antd/tabs';
 
 @Component({
   selector: 'app-side-menu',
