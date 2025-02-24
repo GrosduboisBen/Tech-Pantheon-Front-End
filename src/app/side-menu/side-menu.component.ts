@@ -4,6 +4,8 @@ import {
   T_Navigation,
   createNavigationList,
 } from '../utils/menu-utils/interfaces';
+import { Router } from '@angular/router';
+import { NzTabChangeEvent } from 'ng-zorro-antd/tabs';
 
 @Component({
   selector: 'app-side-menu',
@@ -11,30 +13,25 @@ import {
   styleUrls: ['./side-menu.component.scss'],
 })
 export class SideMenuComponent implements OnInit {
+  private router: Router = new Router();
   public navigationLabels: T_Navigation[] = createNavigationList();
   public tabs: E_NavigationItem[] = [];
-  selectedIndex = 27;
+  selectedIndex = 0;
 
-  // TODO: Transform to navigation function
-  log(args: any[]): void {
+  tabNavigate(args: E_NavigationItem): void {
     console.log(args);
+    const url = args.name.toLocaleLowerCase();
+    if (!args.disabled) {
+      this.router.navigateByUrl(`/${url}`);
+    }
   }
 
   ngOnInit(): void {
     this.navigationLabels.map(item => {
       this.tabs.push({
         name: item.title,
-        disabled: false,
-        content: `Content of tab ${item.key}`,
+        disabled: item.disabled,
       });
     });
-
-    // for (let i = 0; i < 30; i++) {
-    //   this.tabs.push({
-    //     name: `Tab ${i}`,
-    //     disabled: i === 28,
-    //     content: `Content of tab ${i}`
-    //   });
-    // }
   }
 }
