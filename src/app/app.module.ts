@@ -57,8 +57,8 @@ registerLocaleData(en);
   ],
   providers: [
     { provide: NZ_I18N, useValue: en_US },
-    UsersApi, // Ajouter UsersApi ici
-    { provide: 'API_CONFIG', useValue: API_CONFIG }, // Fournir la configuration de l'API
+    UsersApi,
+    { provide: 'API_CONFIG', useValue: API_CONFIG },
   ],
   bootstrap: [AppComponent],
 })

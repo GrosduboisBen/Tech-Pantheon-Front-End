@@ -1,8 +1,8 @@
 export const API_CONFIG = {
-  basePath: 'http://localhost:8000', // Remplace par l'URL réelle de ton API
+  // TODO : Use Dynamic Url config from .env
+  basePath: 'http://localhost:8000',
 };
 
-// ServerConfiguration reste le même, il utilise `API_CONFIG` pour l'URL
 export class ServerConfiguration<T extends Record<string, string>> {
   public constructor(
     private url: string,

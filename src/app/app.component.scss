@@ -3,5 +3,9 @@
         // nz-tabset{
         //     height: 100% !important;
         // }
+        .main-container{
+            display: flex;
+            flex-direction: row;
+        }
     }
 }

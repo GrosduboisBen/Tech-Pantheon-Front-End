@@ -25,4 +25,11 @@ export class UsersComponent implements OnInit {
     this.users$ = this.store.select(selectAllUsers);
     this.loading$ = this.store.select(selectUserLoading);
   }
+
+  /**
+   * name
+   */
+  public addUser() {
+    
+  }
 }
