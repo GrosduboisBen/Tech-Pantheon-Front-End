@@ -28,6 +28,8 @@ import { UserEffects } from '../services/states/users/users.effects';
 import { UsersApi } from 'src/services'; // Importer le service UsersApi
 import { API_CONFIG } from 'src/services/servers';
 import { UsersComponent } from './components/users/users.component'; // Importer la configuration de l'API
+import { headerReducer } from 'src/services/states/headers/headers.reducers';
+import { HeadersEffects } from 'src/services/states/headers/headers.effects';
 
 registerLocaleData(en);
 
@@ -51,8 +53,8 @@ registerLocaleData(en);
     NzButtonModule,
     NzDrawerModule,
     NzTabsModule,
-    StoreModule.forRoot({ users: userReducer }),
-    EffectsModule.forRoot([UserEffects]),
+    StoreModule.forRoot({ users: userReducer, headers: headerReducer }),
+    EffectsModule.forRoot([UserEffects, HeadersEffects]),
     StoreDevtoolsModule.instrument({ maxAge: 25 }),
   ],
   providers: [
