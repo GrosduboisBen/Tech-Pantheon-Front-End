@@ -1,6 +1,7 @@
 <nz-tabset
   [nzTabPosition]="'left'"
   [(nzSelectedIndex)]="selectedIndex"
+  [nzTabBarStyle]="{fontWeight:'bold'}"
 >
   <nz-tab
     *ngFor="let tab of tabs; let i = index"
