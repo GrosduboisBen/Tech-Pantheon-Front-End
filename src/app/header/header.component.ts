@@ -16,11 +16,6 @@ export class HeaderComponent implements OnInit {
   constructor(private store: Store) {
     this.title$ = this.store.select(selectHeaderTitle);
     this.subTitle$ = this.store.select(selectHeaderSubtitle);
-    this.title$.subscribe(title => console.log('🎯 Titre actuel :', title));
-    this.subTitle$.subscribe(subTitle =>
-      console.log('🎯 Sous-titre actuel :', subTitle)
-    );
-    this.store.subscribe(state => console.log('🗂️ Store global:', state));
   }
   /**
    * getTitle

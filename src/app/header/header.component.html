@@ -1,8 +1,15 @@
 
     <nz-page-header 
-      class="site-page-header" 
-      [nzTitle]="(title$ | async) ?? ''"
-      [nzSubtitle]="(subTitle$ | async) ?? ''">
+      class="site-page-header">
+      <nz-page-header-title>{{(title$ | async) ?? ''}}</nz-page-header-title>
+      <nz-page-header-subtitle>
+        <div class="subtitle-container">
+          <span>
+            {{(subTitle$ | async) ?? ''}}
+          </span>
+          <span>test</span>
+        </div>
+      </nz-page-header-subtitle>
       <nz-page-header-extra>
         <nz-space>
         </nz-space>
