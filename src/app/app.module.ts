@@ -30,6 +30,7 @@ import { API_CONFIG } from 'src/services/servers';
 import { UsersComponent } from './components/users/users.component'; // Importer la configuration de l'API
 import { headerReducer } from 'src/services/states/headers/headers.reducers';
 import { HeadersEffects } from 'src/services/states/headers/headers.effects';
+import { NzImageModule } from 'ng-zorro-antd/image';
 
 registerLocaleData(en);
 
@@ -53,6 +54,7 @@ registerLocaleData(en);
     NzButtonModule,
     NzDrawerModule,
     NzTabsModule,
+    NzImageModule,
     StoreModule.forRoot({ users: userReducer, headers: headerReducer }),
     EffectsModule.forRoot([UserEffects, HeadersEffects]),
     StoreDevtoolsModule.instrument({ maxAge: 25 }),

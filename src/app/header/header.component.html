@@ -1,7 +1,18 @@
 
     <nz-page-header 
       class="site-page-header">
+      <nz-page-header-title class="header-main-title">
+        <img
+        nz-image
+        width="50em"
+        height="50em"
+        nzSrc="assets/techpanth.png"
+        alt=""
+      />
+        Tech Pantheon
+      </nz-page-header-title>
       <nz-page-header-title>{{(title$ | async) ?? ''}}</nz-page-header-title>
+
       <nz-page-header-subtitle>
         <div class="subtitle-container">
           <span>

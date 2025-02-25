@@ -1,14 +1,16 @@
+@import '/src/assets/variables.scss';
+
 .ant-btn {
     background-color: rgb(96, 219, 13);
 }
-:host{
-    ::ng-deep{
-        // nz-tabset{
-        //     height: 100% !important;
-        // }
-        .subtitle-container {
-            display: flex;
-            flex-direction: row;
-        }
+:host {
+    font-family: 'Quantico-Regular',sans-serif;
+    .header-main-title{
+        color: map-get($colors, app-orange );
+    };
+    .subtitle-container {
+        display: flex;
+        flex-direction: row;
     }
 }
+

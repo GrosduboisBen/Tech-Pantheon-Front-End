@@ -2,7 +2,6 @@
 
 @import "~ng-zorro-antd/ng-zorro-antd.dark.css";
 
-
 /* You can add global styles to this file, and also import other style files */
 html, body { height: 100%; }
 body { 
@@ -13,10 +12,15 @@ body {
 /* You can add global styles to this file, and also import other style files */
 @import './assets/variables.scss';
 
-// Argentum font import
+// // Argentum font import
+// @font-face {
+//     font-family: Argentum-Regular;
+//     src: url(./assets/fonts/argentum-sans/ArgentumSans-Regular.ttf) format('truetype');
+// }
+
 @font-face {
-    font-family: Argentum-Regular;
-    src: url(./assets/fonts/argentum-sans/ArgentumSans-Regular.ttf) format('truetype');
+    font-family: Quantico-Regular;
+    src: url(./assets/fonts/quantico/Quantico/Quantico-Regular.ttf) format('truetype');
 }
 
 .base-button{
