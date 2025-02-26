@@ -25,6 +25,11 @@ export interface UserUpdate {
      * @type {string}
      * @memberof UserUpdate
      */
+    description?: string | null;
+    /**
+     * @type {string}
+     * @memberof UserUpdate
+     */
     email?: string | null;
     /**
      * @type {string}
