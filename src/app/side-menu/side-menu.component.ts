@@ -18,7 +18,6 @@ export class SideMenuComponent implements OnInit {
   selectedIndex = 0;
 
   tabNavigate(args: E_NavigationItem): void {
-    console.log(args);
     const url = args.name.toLocaleLowerCase();
     if (!args.disabled) {
       this.router.navigateByUrl(`/${url}`);
