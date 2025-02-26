@@ -35,5 +35,10 @@ export interface UserCreate {
      * @type {string}
      * @memberof UserCreate
      */
+    main_job: string | null;
+    /**
+     * @type {string}
+     * @memberof UserCreate
+     */
     password: string;
 }
