@@ -31,6 +31,8 @@ import { UsersComponent } from './components/users/users.component'; // Importer
 import { headerReducer } from 'src/services/states/headers/headers.reducers';
 import { HeadersEffects } from 'src/services/states/headers/headers.effects';
 import { NzImageModule } from 'ng-zorro-antd/image';
+import { NzGridModule } from 'ng-zorro-antd/grid';
+import { NzCardModule } from 'ng-zorro-antd/card';
 
 registerLocaleData(en);
 
@@ -49,6 +51,8 @@ registerLocaleData(en);
     HttpClientModule,
     NzPageHeaderModule,
     BrowserAnimationsModule,
+    NzCardModule,
+    NzGridModule,
     NzBreadCrumbModule,
     NzSpaceModule,
     NzButtonModule,
