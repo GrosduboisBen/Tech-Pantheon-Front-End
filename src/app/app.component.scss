@@ -1,3 +1,5 @@
+@import 'src/assets/variables.scss';
+
 :host{
     ::ng-deep{
         // nz-tabset{
@@ -6,6 +8,9 @@
         .main-container{
             display: flex;
             flex-direction: row;
+        }
+        .ant-tabs-tab-active > .ant-tabs-tab-btn{
+            color: map-get($colors , app-orange ) !important;
         }
     }
 }

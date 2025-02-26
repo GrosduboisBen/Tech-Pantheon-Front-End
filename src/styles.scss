@@ -25,6 +25,7 @@ body {
     src: url(./assets/fonts/quantico/Quantico/Quantico-Regular.ttf) format('truetype');
 }
 
+
 .base-button{
     background-color: map-get( $colors, app-green );
     border-radius: 5px;
