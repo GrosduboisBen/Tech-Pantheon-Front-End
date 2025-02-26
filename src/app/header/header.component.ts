@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import {
@@ -15,6 +16,8 @@ import {
 export class HeaderComponent implements OnInit {
   public title$: Observable<string>;
   public subTitle$: Observable<string>;
+  private router: Router = new Router();
+
   constructor(private store: Store) {
     this.title$ = this.store.select(selectHeaderTitle);
     this.subTitle$ = this.store.select(selectHeaderSubtitle);
@@ -33,5 +36,8 @@ export class HeaderComponent implements OnInit {
   ngOnInit() {
     this.title$ = this.store.select(selectHeaderTitle);
     this.subTitle$ = this.store.select(selectHeaderSubtitle);
+  }
+  navigateHome() {
+    this.router.navigateByUrl('/home');
   }
 }
