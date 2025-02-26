@@ -1,6 +1,9 @@
-<nz-card >
+<nz-card 
+    *ngIf="currentUser$ | async as user;"
+    nzTitle={{userMainJob}}>
     <div nz-row>
-        <p>home works!</p>
-        <p>and works!</p>
+        <p>
+            {{user.description}}
+        </p>
     </div>
 </nz-card>

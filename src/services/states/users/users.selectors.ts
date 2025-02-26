@@ -8,14 +8,11 @@ export const selectAllUsers = createSelector(
   state => state.users
 );
 
-export const selectUserPagination = createSelector(
-  selectUserState,
-  state => ({
-    total: state.total,
-    page: state.page,
-    pageSize: state.pageSize,
-  }) // Sélecteur pour la pagination
-);
+export const selectUserPagination = createSelector(selectUserState, state => ({
+  total: state.total,
+  page: state.page,
+  pageSize: state.pageSize,
+}));
 
 export const selectUserById = (id: string) =>
   createSelector(selectUserState, state =>

@@ -33,7 +33,7 @@ export class UserEffects {
   // Effet pour charger un utilisateur spécifique
   loadUser$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(UserActions.loadUser),
+      ofType(UserActions.loadUserById),
       mergeMap(action =>
         this.userService
           .readUserApiUsersUserIdGet({ userId: action.userId })
