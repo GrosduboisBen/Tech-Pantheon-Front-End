@@ -12,11 +12,11 @@ body {
 /* You can add global styles to this file, and also import other style files */
 @import './assets/variables.scss';
 
-// // Argentum font import
-// @font-face {
-//     font-family: Argentum-Regular;
-//     src: url(./assets/fonts/argentum-sans/ArgentumSans-Regular.ttf) format('truetype');
-// }
+// Argentum font import
+@font-face {
+    font-family: Argentum-Regular;
+    src: url(./assets/fonts/argentum-sans/ArgentumSans-Regular.ttf) format('truetype');
+}
 
 @font-face {
     font-family: Quantico-Regular;
