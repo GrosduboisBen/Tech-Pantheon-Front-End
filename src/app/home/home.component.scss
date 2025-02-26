@@ -1,6 +1,6 @@
 @import '/src/assets/variables.scss';
 
-::ng-deep{
+::ng-deep {
     .ant-card-head-title {
         font-weight: bold;
         color: map-get($colors, app-orange );
@@ -9,4 +9,10 @@
 
 :host {
     width: 100%;
+}
+
+.home-main-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
 }
