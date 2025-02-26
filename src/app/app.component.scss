@@ -9,8 +9,13 @@
             display: flex;
             flex-direction: row;
         }
-        .ant-tabs-tab-active > .ant-tabs-tab-btn{
-            color: map-get($colors , app-orange ) !important;
+        .ant-tabs-tab-active {
+            > .ant-tabs-tab-btn{
+                color: map-get($colors , app-orange ) !important;
+            }
+        }
+        .ant-tabs-ink-bar {
+            background: map-get($colors , app-orange ) !important;
         }
     }
 }
