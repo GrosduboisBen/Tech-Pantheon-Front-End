@@ -9,7 +9,10 @@ import { en_US } from 'ng-zorro-antd/i18n';
 import { registerLocaleData } from '@angular/common';
 import en from '@angular/common/locales/en';
 import { FormsModule } from '@angular/forms';
-import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import {
+  provideHttpClient,
+  withInterceptorsFromDi,
+} from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HeaderComponent } from './header/header.component';
 import { NzPageHeaderModule } from 'ng-zorro-antd/page-header';
@@ -33,35 +36,43 @@ import { HeadersEffects } from 'src/services/states/headers/headers.effects';
 import { NzImageModule } from 'ng-zorro-antd/image';
 import { NzGridModule } from 'ng-zorro-antd/grid';
 import { NzCardModule } from 'ng-zorro-antd/card';
+import { NgScrollbarModule } from 'ngx-scrollbar';
 
 registerLocaleData(en);
 
-@NgModule({ declarations: [
-        AppComponent,
-        HomeComponent,
-        HeaderComponent,
-        SideMenuComponent,
-        UsersComponent,
-    ],
-    bootstrap: [AppComponent], imports: [BrowserModule,
-        AppRoutingModule,
-        FormsModule,
-        NzPageHeaderModule,
-        BrowserAnimationsModule,
-        NzCardModule,
-        NzGridModule,
-        NzBreadCrumbModule,
-        NzSpaceModule,
-        NzButtonModule,
-        NzDrawerModule,
-        NzTabsModule,
-        NzImageModule,
-        StoreModule.forRoot({ users: userReducer, headers: headerReducer }),
-        EffectsModule.forRoot([UserEffects, HeadersEffects]),
-        StoreDevtoolsModule.instrument({ maxAge: 25 })], providers: [
-        { provide: NZ_I18N, useValue: en_US },
-        UsersApi,
-        { provide: 'API_CONFIG', useValue: API_CONFIG },
-        provideHttpClient(withInterceptorsFromDi()),
-    ] })
+@NgModule({
+  declarations: [
+    AppComponent,
+    HomeComponent,
+    HeaderComponent,
+    SideMenuComponent,
+    UsersComponent,
+  ],
+  bootstrap: [AppComponent],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    FormsModule,
+    NzPageHeaderModule,
+    BrowserAnimationsModule,
+    NzCardModule,
+    NzGridModule,
+    NzBreadCrumbModule,
+    NzSpaceModule,
+    NzButtonModule,
+    NzDrawerModule,
+    NzTabsModule,
+    NzImageModule,
+    NgScrollbarModule,
+    StoreModule.forRoot({ users: userReducer, headers: headerReducer }),
+    EffectsModule.forRoot([UserEffects, HeadersEffects]),
+    StoreDevtoolsModule.instrument({ maxAge: 25 }),
+  ],
+  providers: [
+    { provide: NZ_I18N, useValue: en_US },
+    UsersApi,
+    { provide: 'API_CONFIG', useValue: API_CONFIG },
+    provideHttpClient(withInterceptorsFromDi()),
+  ],
+})
 export class AppModule {}

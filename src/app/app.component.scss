@@ -17,5 +17,8 @@
         .ant-tabs-ink-bar {
             background: map-get($colors , app-orange ) !important;
         }
+        .scrollbar{
+            background-color: map-get($colors , app-orange ) !important;
+        }
     }
 }
