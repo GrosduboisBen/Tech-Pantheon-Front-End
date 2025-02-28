@@ -24,3 +24,7 @@
     gap:1em;
     width: 100%;
 }
+
+.main-card {
+    background-color: map-get($colors , main-card-grey );
+}

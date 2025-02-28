@@ -1,5 +1,5 @@
 <div class="home-main-container">
-    <nz-card 
+    <nz-card nzHoverable class="main-card"
         *ngIf="currentUser$ | async as user;"
         nzTitle={{userMainJob}}>
         <div nz-row>
@@ -9,27 +9,39 @@
         </div>
     </nz-card>
     <div nz-row class="row-container">
-        <nz-card nz-col nzSpan="24"
+        <nz-card class="main-card" nzHoverable nz-col nzSpan="24"
             nzTitle="Projects">
+            <div nz-row>
+                <nz-card class="main-card" nzHoverable [nzCover]="coverTemplate">
+                    <nz-card-meta
+                    nzTitle="Card title"
+                    nzDescription="This is the description"
+                    >
+                </nz-card-meta>
+                </nz-card>
+            </div>
         </nz-card>
     </div>
     <div nz-row class="row-container">
-        <nz-card nz-col nzSpan="8"
+        <nz-card class="main-card" nzHoverable nz-col nzSpan="8"
             nzTitle="Resume">
         </nz-card>
-        <nz-card nz-col nzSpan="8"
+        <nz-card class="main-card" nzHoverable nz-col nzSpan="8"
             nzTitle="Feedbacks">
         </nz-card>
-        <nz-card nz-col nzSpan="6"
+        <nz-card class="main-card" nzHoverable nz-col nzSpan="6"
             nzTitle="Expertise">
         </nz-card>
     </div>
     <div nz-row class="row-container">
-        <nz-card nz-col nzSpan="11"
+        <nz-card class="main-card" nzHoverable nz-col nzSpan="11"
             nzTitle="Calendar Preview">
         </nz-card>
-        <nz-card nz-col nzSpan="11"
+        <nz-card class="main-card" nzHoverable nz-col nzSpan="11"
             nzTitle="Proposal Form">
         </nz-card>
     </div>
 </div>
+<ng-template #coverTemplate>
+    <img alt="example" src="assets/techpanth.png" />
+  </ng-template>
