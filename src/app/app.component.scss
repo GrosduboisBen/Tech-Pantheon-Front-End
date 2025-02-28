@@ -11,14 +11,14 @@
         }
         .ant-tabs-tab-active {
             > .ant-tabs-tab-btn{
-                color: map-get($colors , app-orange ) !important;
+                color: map.get($colors , app-orange ) !important;
             }
         }
         .ant-tabs-ink-bar {
-            background: map-get($colors , app-orange ) !important;
+            background: map.get($colors , app-orange ) !important;
         }
         .scrollbar{
-            background-color: map-get($colors , app-orange ) !important;
+            background-color: map.get($colors , app-orange ) !important;
         }
     }
 }

@@ -3,7 +3,7 @@
 ::ng-deep {
     .ant-card-head-title {
         font-weight: bold;
-        color: map-get($colors, app-orange );
+        color: map.get($colors, app-orange );
     }
 }
 
@@ -26,5 +26,5 @@
 }
 
 .main-card {
-    background-color: map-get($colors , main-card-grey );
+    background-color: map.get($colors , main-card-grey );
 }

@@ -6,7 +6,7 @@
 :host {
     font-family: 'Quantico-Regular',sans-serif;
     .header-main-title{
-        color: map-get($colors, app-orange );
+        color: map.get($colors, app-orange );
     };
     .subtitle-container {
         display: flex;

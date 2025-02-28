@@ -27,11 +27,11 @@ body {
 
 
 .base-button{
-    background-color: map-get( $colors, app-green );
+    background-color: map.get( $colors, app-green );
     border-radius: 5px;
-    color: map-get($colors, header );
+    color: map.get($colors, header );
     transition: all 0.3s;
     &:hover{
-        color: map-get($colors, primary );
+        color: map.get($colors, primary );
     }
 }
