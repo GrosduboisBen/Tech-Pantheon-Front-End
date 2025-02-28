@@ -41,6 +41,7 @@ module.exports = tseslint.config(
             arrowParens: "avoid",
           },
         ],
+        "@angular-eslint/prefer-standalone":"off"
     },
   },
   {
