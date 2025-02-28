@@ -5,9 +5,10 @@ import { selectUserByName } from 'src/services/states/users/users.selectors';
 import { refreshUser } from '../utils/entities/user-utils';
 import { UserResponse } from 'src/services';
 @Component({
-  selector: 'app-home',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.scss'],
+    selector: 'app-home',
+    templateUrl: './home.component.html',
+    styleUrls: ['./home.component.scss'],
+    standalone: false
 })
 export class HomeComponent implements OnInit {
   currentUser$: Observable<UserResponse | undefined> =

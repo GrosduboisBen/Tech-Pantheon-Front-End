@@ -10,9 +10,10 @@ import { UserResponse } from 'src/services';
 import { UserState } from 'src/services/states/users/users.reducers';
 
 @Component({
-  selector: 'app-users',
-  templateUrl: './users.component.html',
-  styleUrls: ['./users.component.scss'],
+    selector: 'app-users',
+    templateUrl: './users.component.html',
+    styleUrls: ['./users.component.scss'],
+    standalone: false
 })
 export class UsersComponent implements OnInit {
   users$: Observable<UserResponse[]> = new Observable<UserResponse[]>();
