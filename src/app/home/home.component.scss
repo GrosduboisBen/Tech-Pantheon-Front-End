@@ -16,3 +16,11 @@
     flex-direction: column;
     gap: 1em;
 }
+
+.row-container {
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    gap:1em;
+    width: 100%;
+}

@@ -18,11 +18,13 @@ export class UsersComponent implements OnInit {
   users$: Observable<UserResponse[]> = new Observable<UserResponse[]>();
   loading$: Observable<boolean> = new Observable<boolean>();
 
-  constructor(private store: Store<UserState>) {}
+  constructor(private store: Store<UserState>) {
+    this.users$ = this.store.select(selectAllUsers);
+    this.loading$ = this.store.select(selectUserLoading);
+  }
 
   ngOnInit(): void {
     this.store.dispatch(loadUsers({}));
-    this.users$ = this.store.select(selectAllUsers);
-    this.loading$ = this.store.select(selectUserLoading);
+    console.log(this.users$);
   }
 }
