@@ -9,7 +9,7 @@ import { en_US } from 'ng-zorro-antd/i18n';
 import { registerLocaleData } from '@angular/common';
 import en from '@angular/common/locales/en';
 import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HeaderComponent } from './header/header.component';
 import { NzPageHeaderModule } from 'ng-zorro-antd/page-header';
@@ -36,38 +36,32 @@ import { NzCardModule } from 'ng-zorro-antd/card';
 
 registerLocaleData(en);
 
-@NgModule({
-  declarations: [
-    AppComponent,
-    HomeComponent,
-    HeaderComponent,
-    SideMenuComponent,
-    UsersComponent,
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    FormsModule,
-    HttpClientModule,
-    NzPageHeaderModule,
-    BrowserAnimationsModule,
-    NzCardModule,
-    NzGridModule,
-    NzBreadCrumbModule,
-    NzSpaceModule,
-    NzButtonModule,
-    NzDrawerModule,
-    NzTabsModule,
-    NzImageModule,
-    StoreModule.forRoot({ users: userReducer, headers: headerReducer }),
-    EffectsModule.forRoot([UserEffects, HeadersEffects]),
-    StoreDevtoolsModule.instrument({ maxAge: 25 }),
-  ],
-  providers: [
-    { provide: NZ_I18N, useValue: en_US },
-    UsersApi,
-    { provide: 'API_CONFIG', useValue: API_CONFIG },
-  ],
-  bootstrap: [AppComponent],
-})
+@NgModule({ declarations: [
+        AppComponent,
+        HomeComponent,
+        HeaderComponent,
+        SideMenuComponent,
+        UsersComponent,
+    ],
+    bootstrap: [AppComponent], imports: [BrowserModule,
+        AppRoutingModule,
+        FormsModule,
+        NzPageHeaderModule,
+        BrowserAnimationsModule,
+        NzCardModule,
+        NzGridModule,
+        NzBreadCrumbModule,
+        NzSpaceModule,
+        NzButtonModule,
+        NzDrawerModule,
+        NzTabsModule,
+        NzImageModule,
+        StoreModule.forRoot({ users: userReducer, headers: headerReducer }),
+        EffectsModule.forRoot([UserEffects, HeadersEffects]),
+        StoreDevtoolsModule.instrument({ maxAge: 25 })], providers: [
+        { provide: NZ_I18N, useValue: en_US },
+        UsersApi,
+        { provide: 'API_CONFIG', useValue: API_CONFIG },
+        provideHttpClient(withInterceptorsFromDi()),
+    ] })
 export class AppModule {}
