@@ -1,6 +1,7 @@
 // Import dark theme
 
-@import "ng-zorro-antd/ng-zorro-antd.dark.css";
+@use "ng-zorro-antd/ng-zorro-antd.dark.css";
+@use "./assets/variables.scss" as variables;
 
 /* You can add global styles to this file, and also import other style files */
 html, body { 
@@ -12,7 +13,6 @@ body {
 }
 
 /* You can add global styles to this file, and also import other style files */
-@import './assets/variables.scss';
 
 // Argentum font import
 @font-face {
@@ -27,11 +27,11 @@ body {
 
 
 .base-button{
-    background-color: map.get( $colors, app-green );
+    background-color: variables.$app-green;
     border-radius: 5px;
-    color: map.get($colors, header );
+    color: variables.$header;
     transition: all 0.3s;
     &:hover{
-        color: map.get($colors, primary );
+        color: variables.$primary;
     }
 }

@@ -1,4 +1,4 @@
-@import '/src/assets/variables.scss';
+@use "src/assets/variables.scss" as variables;
 
 .ant-btn {
     background-color: rgb(96, 219, 13);
@@ -6,7 +6,7 @@
 :host {
     font-family: 'Quantico-Regular',sans-serif;
     .header-main-title{
-        color: map.get($colors, app-orange );
+        color: varialbes.$app-orange;
     };
     .subtitle-container {
         display: flex;

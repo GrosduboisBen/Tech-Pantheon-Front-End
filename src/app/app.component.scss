@@ -1,4 +1,4 @@
-@import 'src/assets/variables.scss';
+@use "src/assets/variables.scss" as variables;
 
 :host{
     ::ng-deep{
@@ -11,14 +11,14 @@
         }
         .ant-tabs-tab-active {
             > .ant-tabs-tab-btn{
-                color: map.get($colors , app-orange ) !important;
+                color: variables.$app-orange !important;
             }
         }
         .ant-tabs-ink-bar {
-            background: map.get($colors , app-orange ) !important;
+            background: variables.$app-orange !important;
         }
         .scrollbar{
-            background-color: map.get($colors , app-orange ) !important;
+            background-color: variables.$app-orange !important;
         }
     }
 }
