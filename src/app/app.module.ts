@@ -28,11 +28,14 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 import { userReducer } from '../services/states/users/users.reducers';
 import { UserEffects } from '../services/states/users/users.effects';
-import { UsersApi } from 'src/services'; // Importer le service UsersApi
+import { UsersApi } from 'src/services';
+import { ProjectsApi } from 'src/services';
 import { API_CONFIG } from 'src/services/servers';
 import { UsersComponent } from './components/users/users.component'; // Importer la configuration de l'API
 import { headerReducer } from 'src/services/states/headers/headers.reducers';
+import { projectReducer } from 'src/services/states/projects/projects.reducers';
 import { HeadersEffects } from 'src/services/states/headers/headers.effects';
+import { ProjectEffects } from 'src/services/states/projects/projects.effects';
 import { NzImageModule } from 'ng-zorro-antd/image';
 import { NzGridModule } from 'ng-zorro-antd/grid';
 import { NzCardModule } from 'ng-zorro-antd/card';
@@ -64,13 +67,18 @@ registerLocaleData(en);
     NzTabsModule,
     NzImageModule,
     NgScrollbarModule,
-    StoreModule.forRoot({ users: userReducer, headers: headerReducer }),
-    EffectsModule.forRoot([UserEffects, HeadersEffects]),
+    StoreModule.forRoot({
+      users: userReducer,
+      headers: headerReducer,
+      projects: projectReducer,
+    }),
+    EffectsModule.forRoot([UserEffects, HeadersEffects, ProjectEffects]),
     StoreDevtoolsModule.instrument({ maxAge: 25 }),
   ],
   providers: [
-    { provide: NZ_I18N, useValue: en_US },
     UsersApi,
+    ProjectsApi,
+    { provide: NZ_I18N, useValue: en_US },
     { provide: 'API_CONFIG', useValue: API_CONFIG },
     provideHttpClient(withInterceptorsFromDi()),
   ],
