@@ -60,6 +60,11 @@ export interface ProjectCreate {
      * @memberof ProjectCreate
      */
     client_id: string;
+    /**
+     * @type {string}
+     * @memberof ProjectCreate
+     */
+    handler_id: string | null;
 }
 
 

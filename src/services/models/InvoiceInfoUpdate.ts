@@ -20,25 +20,25 @@ export interface InvoiceInfoUpdate {
      * @type {string}
      * @memberof InvoiceInfoUpdate
      */
-    client_name: string | null;
+    client_name?: string | null;
     /**
      * @type {string}
      * @memberof InvoiceInfoUpdate
      */
-    creation_date: string | null;
+    creation_date?: string | null;
     /**
      * @type {string}
      * @memberof InvoiceInfoUpdate
      */
-    expiry_date: string | null;
+    expiry_date?: string | null;
     /**
      * @type {string}
      * @memberof InvoiceInfoUpdate
      */
-    client_address: string | null;
+    client_address?: string | null;
     /**
      * @type {number}
      * @memberof InvoiceInfoUpdate
      */
-    deposit_price: number | null;
+    deposit_price?: number | null;
 }

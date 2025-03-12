@@ -70,6 +70,11 @@ export interface ProjectResponse {
      * @memberof ProjectResponse
      */
     client_id: string;
+    /**
+     * @type {string}
+     * @memberof ProjectResponse
+     */
+    handler_id: string | null;
 }
 
 

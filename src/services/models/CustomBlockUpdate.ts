@@ -20,10 +20,10 @@ export interface CustomBlockUpdate {
      * @type {string}
      * @memberof CustomBlockUpdate
      */
-    title: string | null;
+    title?: string | null;
     /**
      * @type {string}
      * @memberof CustomBlockUpdate
      */
-    content: string | null;
+    content?: string | null;
 }

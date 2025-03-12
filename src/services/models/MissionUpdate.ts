@@ -20,50 +20,50 @@ export interface MissionUpdate {
      * @type {string}
      * @memberof MissionUpdate
      */
-    title: string | null;
+    title?: string | null;
     /**
      * @type {string}
      * @memberof MissionUpdate
      */
-    description: string | null;
+    description?: string | null;
     /**
      * @type {string}
      * @memberof MissionUpdate
      */
-    project_id: string | null;
+    project_id?: string | null;
     /**
      * @type {string}
      * @memberof MissionUpdate
      */
-    milestone_id: string | null;
+    milestone_id?: string | null;
     /**
      * @type {string}
      * @memberof MissionUpdate
      */
-    technology_id: string | null;
+    technology_id?: string | null;
     /**
      * @type {string}
      * @memberof MissionUpdate
      */
-    start_date: string | null;
+    start_date?: string | null;
     /**
      * @type {string}
      * @memberof MissionUpdate
      */
-    due_date: string | null;
+    due_date?: string | null;
     /**
      * @type {string}
      * @memberof MissionUpdate
      */
-    estimated_delivery: string | null;
+    estimated_delivery?: string | null;
     /**
      * @type {string}
      * @memberof MissionUpdate
      */
-    status: string | null;
+    status?: string | null;
     /**
      * @type {number}
      * @memberof MissionUpdate
      */
-    estimated_cost: number | null;
+    estimated_cost?: number | null;
 }

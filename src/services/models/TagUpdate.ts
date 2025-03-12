@@ -20,5 +20,5 @@ export interface TagUpdate {
      * @type {string}
      * @memberof TagUpdate
      */
-    name: string | null;
+    name?: string | null;
 }

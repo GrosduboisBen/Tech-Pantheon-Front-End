@@ -20,6 +20,6 @@ export enum ProjectStatusEnum {
     Proposed = 'proposed',
     InProgress = 'in_progress',
     Completed = 'completed',
-    Cancelled = 'cancelled'
+    Canceled = 'canceled'
 }
 
