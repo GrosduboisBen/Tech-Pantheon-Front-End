@@ -3,7 +3,7 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import * as HeadersActions from './headers.actions';
 import * as UserActions from '../users/users.actions';
 import { select, Store } from '@ngrx/store';
-import { UserState } from '../users/users.reducers';
+import { CurrentUserState, UserState } from '../users/users.reducers';
 import { HeaderState } from './headers.reducers';
 import { distinctUntilChanged, map, withLatestFrom } from 'rxjs';
 
@@ -11,16 +11,19 @@ import { distinctUntilChanged, map, withLatestFrom } from 'rxjs';
 export class HeadersEffects {
   constructor(
     private actions$: Actions,
-    private store: Store<{ users: UserState; headers: HeaderState }>
+    private store: Store<{
+      singleUser: CurrentUserState;
+      headers: HeaderState;
+    }>
   ) {}
 
   // Effet pour charger tous les utilisateurs
   setTitle$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(UserActions.loadUsersSuccess),
+      ofType(UserActions.loadUserSuccess),
       withLatestFrom(
         this.store.pipe(
-          select(state => state.users.users[0]),
+          select(state => state.singleUser),
           distinctUntilChanged(
             (prev, curr) =>
               prev?.name === curr?.name && prev?.email === curr?.email

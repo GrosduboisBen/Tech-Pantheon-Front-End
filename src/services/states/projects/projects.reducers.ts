@@ -1,9 +1,5 @@
 import { createReducer, on } from '@ngrx/store';
-import {
-  ProjectListResponse,
-  ProjectResponse,
-  ProjectStatusEnum,
-} from '../../models';
+import { ProjectListResponse } from '../../models';
 import * as ProjectActions from './projects.actions';
 //TODO Maybe define supertype or use directly api Model
 // eslint-disable-next-line @typescript-eslint/no-empty-object-type
@@ -11,17 +7,9 @@ export interface ProjectState extends ProjectListResponse {}
 
 export const initialState: ProjectState = {
   projects: [],
-  // client_id: '',
-  // handler_id: '',
-  // creation_date: new Date().toISOString(),
-  // title: '',
-  // description: '',
-  // end_date: null,
-  // id: '',
-  // start_date: null,
-  // status: ProjectStatusEnum.Canceled,
-  // tax_rate: null,
-  // total_price: null,
+  page: 1,
+  page_size: 1,
+  total: 0,
 };
 
 export const projectReducer = createReducer(
@@ -30,12 +18,13 @@ export const projectReducer = createReducer(
     ...state,
     loading: false,
   })),
-  on(ProjectActions.loadProjectSuccess, (state, { projects }) => ({
-    ...state,
-    projects: projects.projects,
-    // total: users.total,
-    // page: users.page,
-    // pageSize: users.page_size,
-    loading: false,
-  }))
+  on(ProjectActions.loadProjectSuccess, state => {
+    return {
+      ...state,
+      projects: state.projects,
+      total: state.total,
+      page: state.page,
+      pageSize: state.page_size,
+    };
+  })
 );

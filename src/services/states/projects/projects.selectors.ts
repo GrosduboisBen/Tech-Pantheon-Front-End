@@ -6,7 +6,7 @@ export const selectProjectState =
 
 export const selectProjects = createSelector(
   selectProjectState,
-  (state: ProjectState) => state.projects
+  state => state.projects
 );
 
 // export const selectHandlerProjects = (handlerId: string) =>

@@ -12,6 +12,9 @@ export interface UserState {
   loading: boolean;
 }
 
+// eslint-disable-next-line @typescript-eslint/no-empty-object-type
+export interface CurrentUserState extends UserResponse {}
+
 export const initialState: UserState = {
   users: [],
   total: 0,
@@ -21,7 +24,46 @@ export const initialState: UserState = {
   loading: false,
 };
 
-export const userReducer = createReducer(
+export const selectedUserState: CurrentUserState = {
+  active: false,
+  creation_date: '',
+  description: '',
+  email: '',
+  id: '',
+  last_login_date: '',
+  main_job: '',
+  name: '',
+  role_id: '',
+};
+
+export const singleUserReducer = createReducer(
+  selectedUserState,
+  on(UserActions.loadUserById, state => ({
+    ...state,
+    loading: true,
+  })),
+  on(UserActions.loadUserSuccess, (state, { user }) => {
+    return {
+      ...state,
+      active: user.active,
+      creation_date: user.creation_date,
+      description: user.description,
+      email: user.email,
+      id: user.id,
+      last_login_date: user.last_login_date,
+      main_job: user.main_job,
+      name: user.name,
+      role_id: '',
+    };
+  }),
+  on(UserActions.loadUserFailure, (state, { error }) => ({
+    ...state,
+    error,
+    loading: false,
+  }))
+);
+
+export const userListReducer = createReducer(
   initialState,
   on(UserActions.loadUsers, state => ({
     ...state,

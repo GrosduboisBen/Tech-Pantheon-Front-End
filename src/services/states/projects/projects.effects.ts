@@ -12,7 +12,7 @@ import {
 import { of } from 'rxjs';
 import { ProjectsApi } from '../../apis';
 import { select, Store } from '@ngrx/store';
-import { UserState } from '../users/users.reducers';
+import { CurrentUserState, UserState } from '../users/users.reducers';
 import { ProjectState } from './projects.reducers';
 
 @Injectable()
@@ -20,7 +20,10 @@ export class ProjectEffects {
   constructor(
     private actions$: Actions,
     private projectService: ProjectsApi,
-    private store: Store<{ users: UserState; projects: ProjectState }>
+    private store: Store<{
+      singleUser: CurrentUserState;
+      projects: ProjectState;
+    }>
   ) {}
   loadProject$ = createEffect(() =>
     this.actions$.pipe(
@@ -31,9 +34,7 @@ export class ProjectEffects {
             handlerId: action.handlerId,
           })
           .pipe(
-            map(projects => {
-              return ProjectActions.loadProjectSuccess({ projects });
-            }),
+            map(projects => ProjectActions.loadProjectSuccess({ projects })),
             catchError(error =>
               of(ProjectActions.loadProjectsFailure({ error }))
             )
@@ -43,19 +44,20 @@ export class ProjectEffects {
   );
   setUserProject$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(UserActions.loadUsersSuccess),
+      ofType(UserActions.loadUserSuccess),
       withLatestFrom(
         this.store.pipe(
-          select(state => state.users.users[0]),
+          select(state => state.singleUser),
           distinctUntilChanged(
             (prev, curr) =>
               prev?.name === curr?.name && prev?.email === curr?.email
           )
         )
       ),
-      map(([_, user]) => {
+      map(([user]) => {
+        console.log(user);
         return ProjectActions.loadUserProjects({
-          handlerId: user.id,
+          handlerId: user.user.id,
         });
       })
     )

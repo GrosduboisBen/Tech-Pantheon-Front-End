@@ -1,17 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { selectUserByName } from 'src/services/states/users/users.selectors';
+import { selectCurrentUser } from 'src/services/states/users/users.selectors';
 import { refreshUser } from '../utils/entities/user-utils';
-import {
-  ProjectListResponse,
-  ProjectResponse,
-  UserResponse,
-} from 'src/services';
-import {
-  selectProjects,
-} from 'src/services/states/projects/projects.selectors';
-import { loadUserProjects } from 'src/services/states/projects/projects.actions';
+import { ProjectResponse, UserResponse } from 'src/services';
+import { selectProjects } from 'src/services/states/projects/projects.selectors';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -22,16 +15,21 @@ export class HomeComponent implements OnInit {
   currentUser$: Observable<UserResponse | undefined> =
     new Observable<UserResponse>();
   userMainJob: string;
-  userProjects$: Observable<ProjectResponse[] | undefined> = new Observable<ProjectResponse[]>();
+  userProjects$: Observable<ProjectResponse[] | undefined> = new Observable<
+    ProjectResponse[]
+  >();
   constructor(private store: Store) {
-    this.currentUser$ = this.store.select(selectUserByName('Ben'));
+    this.currentUser$ = this.store.select(selectCurrentUser);
     this.userProjects$ = this.store.select(selectProjects);
     this.userMainJob = '';
   }
 
   ngOnInit(): void {
-    refreshUser(this.store, 'Ben');
-    this.store.select(selectUserByName('Ben')).subscribe(user => {
+    // TODO: ADD Authentication logic.
+    refreshUser(this.store, '99aa0321-07d1-49ec-bad3-3fb633cd2729');
+    this.userProjects$ = this.store.select(selectProjects);
+
+    this.store.select(selectCurrentUser).subscribe(user => {
       if (user) {
         this.userMainJob = user.main_job ?? '';
       }

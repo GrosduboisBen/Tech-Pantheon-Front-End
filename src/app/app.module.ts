@@ -26,7 +26,7 @@ import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
-import { userReducer } from '../services/states/users/users.reducers';
+import { singleUserReducer, userListReducer } from '../services/states/users/users.reducers';
 import { UserEffects } from '../services/states/users/users.effects';
 import { UsersApi } from 'src/services';
 import { ProjectsApi } from 'src/services';
@@ -68,7 +68,8 @@ registerLocaleData(en);
     NzImageModule,
     NgScrollbarModule,
     StoreModule.forRoot({
-      users: userReducer,
+      users: userListReducer,
+      singleUser: singleUserReducer,
       headers: headerReducer,
       projects: projectReducer,
     }),
