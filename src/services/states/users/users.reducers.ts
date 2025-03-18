@@ -1,6 +1,5 @@
 import { createReducer, on } from '@ngrx/store';
 import * as UserActions from './users.actions';
-import * as HeadersActions from '../headers/headers.actions';
 import { UserResponse } from '../../models';
 
 export interface UserState {

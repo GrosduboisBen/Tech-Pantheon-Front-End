@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { loadUserById } from 'src/services/states/users/users.actions';
+import { selectCurrentUser } from 'src/services/states/users/users.selectors';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',

@@ -14,17 +14,13 @@ export const initialState: ProjectState = {
 
 export const projectReducer = createReducer(
   initialState,
-  on(ProjectActions.loadUserProjects, state => ({
-    ...state,
-    loading: false,
-  })),
-  on(ProjectActions.loadProjectSuccess, state => {
+  on(ProjectActions.loadProjectSuccess, (state, { projects }) => {
     return {
       ...state,
-      projects: state.projects,
-      total: state.total,
-      page: state.page,
-      pageSize: state.page_size,
+      projects: projects.projects,
+      total: projects.total,
+      page: projects.page,
+      pageSize: projects.page_size,
     };
   })
 );

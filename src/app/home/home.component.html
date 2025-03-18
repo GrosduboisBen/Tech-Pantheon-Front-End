@@ -9,15 +9,22 @@
         </div>
     </nz-card>
     <div nz-row class="row-container">
-        <nz-card class="main-card" nzHoverable nz-col nzSpan="24"
+        <nz-card
+            class="main-card"
+            nzHoverable nz-col
+            nzSpan="24"
             nzTitle="Projects">
-            <div nz-row>
-                <nz-card class="main-card" nzHoverable [nzCover]="coverTemplate">
+            <div 
+                class="row-container"
+                nz-row *ngIf="userProjects$ | async as projects">
+                <nz-card 
+                    *ngFor="let project of projects.projects"
+                    class="main-card" 
+                    nzHoverable [nzCover]="coverTemplate">
                     <nz-card-meta
-                    nzTitle="Card title"
-                    nzDescription="This is the description"
-                    >
-                </nz-card-meta>
+                    nzTitle="{{project.title}}"
+                    nzDescription="This is the description">
+                    </nz-card-meta>
                 </nz-card>
             </div>
         </nz-card>

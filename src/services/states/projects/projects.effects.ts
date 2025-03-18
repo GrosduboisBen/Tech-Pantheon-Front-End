@@ -28,18 +28,19 @@ export class ProjectEffects {
   loadProject$ = createEffect(() =>
     this.actions$.pipe(
       ofType(ProjectActions.loadUserProjects),
-      mergeMap(action =>
-        this.projectService
+      mergeMap(action => {
+        console.log(action);
+        return this.projectService
           .readProjectApiProjectsHandlerHandlerIdGet({
-            handlerId: action.handlerId,
+            handlerId: action.id,
           })
           .pipe(
             map(projects => ProjectActions.loadProjectSuccess({ projects })),
             catchError(error =>
               of(ProjectActions.loadProjectsFailure({ error }))
             )
-          )
-      )
+          );
+      })
     )
   );
   setUserProject$ = createEffect(() =>
@@ -54,10 +55,9 @@ export class ProjectEffects {
           )
         )
       ),
-      map(([user]) => {
-        console.log(user);
+      map(([_, user]) => {
         return ProjectActions.loadUserProjects({
-          handlerId: user.user.id,
+          id: user.id,
         });
       })
     )

@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { loadUsers } from 'src/services/states/users/users.actions';
 import {
   selectAllUsers,
   selectUserLoading,
@@ -25,7 +24,7 @@ export class UsersComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.store.dispatch(loadUsers({}));
+    // this.store.dispatch(loadUsers({}));
     console.log(this.users$);
   }
 }
