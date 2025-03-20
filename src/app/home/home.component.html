@@ -1,9 +1,19 @@
 <div class="home-main-container">
-    <nz-card nzHoverable
+    <nz-card nzHoverable class="pale-card"
         *ngIf="currentUser$ | async as user;"
         nzTitle={{userMainJob}}>
-        <div nz-row>
-            <p>
+        <div nz-row class="row-container">
+            <img
+                nz-image
+                nzDisablePreview
+                width="50em"
+                height="50em"
+                nzSrc="assets/techpanth.png"
+                alt=""
+            />
+            <p 
+                nz-col
+                [nzSpan]="16">
                 {{user.description}}
             </p>
         </div>
@@ -13,56 +23,70 @@
         class="main-card pale-card"
         nzHoverable nz-col
         [nzSpan]="11"
+        [nzExtra]="extraTemplate"
         nzTitle="Projects">
-            <p-carousel class="row-container" [value]="projects.projects" [numVisible]="3" [numScroll]="2" [circular]="false" [showIndicators]="false">
+        <ng-template #extraTemplate>
+            <p-tag 
+            [value]="`Total : ${projects.projects.length}`"
+            [severity]="'secondary'">
+            </p-tag>
+        </ng-template>
+        <!-- TODO Add Carousel responsive options -->
+            <p-carousel class="row-container" [value]="projects.projects" [numVisible]="3" [numScroll]="3" [circular]="false" [showIndicators]="false">
                 <ng-template let-project #item>
                     <nz-card
-                        nzHoverable [nzCover]="coverTemplate">
+                        nzHoverable
+                        nz-col
+                        [nzSpan]="20"
+                        [nzCover]="coverTemplate">
                         <nz-card-meta
                             nzTitle="{{project.title}}"
                             nzDescription="This is the description">
                         </nz-card-meta>
                     </nz-card>
+                    <ng-template #coverTemplate>
+                        <img alt="example" src="assets/techpanth.png" />
+                        <p-tag 
+                        [value]="project.status"
+                        [severity]="getSeverity(project.status)">
+                        </p-tag>
+                    </ng-template>
                 </ng-template>
             </p-carousel>
         </nz-card>
-        <nz-card class="main-card pale-card" nzHoverable nz-col nzSpan="11"
+        <nz-card class="main-card pale-card" 
+            nzHoverable
+            nz-col
+            nzSpan="11"
             nzTitle="Resume">
+            <nz-card>
+                WIP ( CDN for preview )
+            </nz-card>
         </nz-card>
     </div>
     <div nz-row class="row-container">
-        <nz-card class="main-card" nzHoverable nz-col nzSpan="8"
+        <nz-card class="main-card" 
+            nzHoverable
+            nz-col
+            nzSpan="11"
             nzTitle="Feedbacks">
+            <nz-card>
+                WIP ( Feedbacks custom route for preview )
+            </nz-card>
         </nz-card>
-        <nz-card class="main-card" nzHoverable nz-col nzSpan="6"
+        <nz-card class="main-card"
+            nzHoverable
+            nz-col
+            nzSpan="12"
             nzTitle="Expertise">
-        </nz-card>
-    </div>
-    <div nz-row class="row-container">
-        <nz-card class="main-card" nzHoverable nz-col nzSpan="11"
-            nzTitle="Calendar Preview">
-        </nz-card>
-        <nz-card class="main-card" nzHoverable nz-col nzSpan="11"
-            nzTitle="Proposal Form">
-        </nz-card>
-    </div>
-    <div nz-row class="row-container">
-        <nz-card class="main-card" nzHoverable nz-col nzSpan="11"
-            nzTitle="Calendar Preview">
-        </nz-card>
-        <nz-card class="main-card" nzHoverable nz-col nzSpan="11"
-            nzTitle="Proposal Form">
-        </nz-card>
-    </div>
-    <div nz-row class="row-container">
-        <nz-card class="main-card" nzHoverable nz-col nzSpan="11"
-            nzTitle="Calendar Preview">
-        </nz-card>
-        <nz-card class="main-card" nzHoverable nz-col nzSpan="11"
-            nzTitle="Proposal Form">
+            <nz-card>
+                WIP ( Pricing & Technologies custom routes for preview )
+            </nz-card>
         </nz-card>
     </div>
 </div>
-<ng-template #coverTemplate>
+
+<ng-template #pictureTemplate>
     <img alt="example" src="assets/techpanth.png" />
-  </ng-template>
+</ng-template>
+

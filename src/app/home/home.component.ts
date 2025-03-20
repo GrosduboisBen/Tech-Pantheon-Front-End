@@ -6,6 +6,7 @@ import { selectCurrentUser } from 'src/services/states/users/users.selectors';
 import {
   ProjectListResponse,
   ProjectResponse,
+  ProjectStatusEnum,
   UserResponse,
 } from 'src/services';
 import { selectProjects } from 'src/services/states/projects/projects.selectors';
@@ -35,5 +36,17 @@ export class HomeComponent implements OnInit {
         this.userMainJob = user.main_job ?? '';
       }
     });
+  }
+  getSeverity(status: ProjectStatusEnum) {
+    switch (status) {
+      case ProjectStatusEnum.Canceled:
+        return 'danger';
+      case ProjectStatusEnum.InProgress:
+        return 'warn';
+      case ProjectStatusEnum.Completed:
+        return 'success';
+      case ProjectStatusEnum.Proposed:
+        return 'info';
+    }
   }
 }

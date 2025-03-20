@@ -29,7 +29,6 @@ export class ProjectEffects {
     this.actions$.pipe(
       ofType(ProjectActions.loadUserProjects),
       mergeMap(action => {
-        console.log(action);
         return this.projectService
           .readProjectApiProjectsHandlerHandlerIdGet({
             handlerId: action.id,
