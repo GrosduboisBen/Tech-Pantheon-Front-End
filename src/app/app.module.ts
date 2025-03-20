@@ -43,6 +43,10 @@ import { NzImageModule } from 'ng-zorro-antd/image';
 import { NzGridModule } from 'ng-zorro-antd/grid';
 import { NzCardModule } from 'ng-zorro-antd/card';
 import { NgScrollbarModule } from 'ngx-scrollbar';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { providePrimeNG } from 'primeng/config';
+import Aura from '@primeng/themes/aura';
+import { ButtonModule } from 'primeng/button';
 
 registerLocaleData(en);
 
@@ -58,6 +62,7 @@ registerLocaleData(en);
   imports: [
     BrowserModule,
     AppRoutingModule,
+    ButtonModule,
     FormsModule,
     NzPageHeaderModule,
     BrowserAnimationsModule,
@@ -82,6 +87,12 @@ registerLocaleData(en);
   providers: [
     UsersApi,
     ProjectsApi,
+    provideAnimationsAsync(),
+    providePrimeNG({
+      theme: {
+        preset: Aura,
+      },
+    }),
     { provide: NZ_I18N, useValue: en_US },
     { provide: 'API_CONFIG', useValue: API_CONFIG },
     provideHttpClient(withInterceptorsFromDi()),
