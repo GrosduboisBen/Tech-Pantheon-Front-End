@@ -29,7 +29,6 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     // TODO: ADD Authentication logic.
-    // refreshUser(this.store, '99aa0321-07d1-49ec-bad3-3fb633cd2729');
     this.userProjects$ = this.store.select(selectProjects);
     this.store.select(selectCurrentUser).subscribe(user => {
       if (user) {

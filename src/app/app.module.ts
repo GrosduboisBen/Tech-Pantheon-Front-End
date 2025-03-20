@@ -47,6 +47,8 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
 import { providePrimeNG } from 'primeng/config';
 import Aura from '@primeng/themes/aura';
 import { ButtonModule } from 'primeng/button';
+import { CarouselModule } from 'primeng/carousel';
+import { TagModule } from 'primeng/tag';
 
 registerLocaleData(en);
 
@@ -63,6 +65,8 @@ registerLocaleData(en);
     BrowserModule,
     AppRoutingModule,
     ButtonModule,
+    CarouselModule,
+    TagModule,
     FormsModule,
     NzPageHeaderModule,
     BrowserAnimationsModule,

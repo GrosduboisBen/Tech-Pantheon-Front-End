@@ -5,10 +5,14 @@
         font-weight: bold;
         color: variables.$app-orange;
     }
+    .p-carousel-item-list {
+        gap: 1em;
+    }
 }
 
 :host {
     width: 100%;
+    
 }
 
 .home-main-container {
@@ -19,12 +23,21 @@
 
 .row-container {
     display: flex;
-    align-items: center;
+    align-items: start;
     justify-content: start;
     gap:1em;
     width: 100%;
 }
 
 .main-card {
+    height: 28em;
+}
+
+.pale-card {
     background-color: variables.$main-card-grey;
 }
+
+.child-card {
+    height: max-content;
+}
+
