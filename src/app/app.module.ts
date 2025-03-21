@@ -31,7 +31,7 @@ import {
   userListReducer,
 } from '../services/states/users/users.reducers';
 import { UserEffects } from '../services/states/users/users.effects';
-import { UsersApi } from 'src/services';
+import { FeedBacksApi, UsersApi } from 'src/services';
 import { ProjectsApi } from 'src/services';
 import { API_CONFIG } from 'src/services/servers';
 import { UsersComponent } from './components/users/users.component'; // Importer la configuration de l'API
@@ -51,8 +51,9 @@ import Aura from '@primeng/themes/aura';
 import { ButtonModule } from 'primeng/button';
 import { CarouselModule } from 'primeng/carousel';
 import { TagModule } from 'primeng/tag';
+import { RatingModule } from 'primeng/rating';
 
-registerLocaleData(en)
+registerLocaleData(en);
 
 @NgModule({
   declarations: [
@@ -69,6 +70,7 @@ registerLocaleData(en)
     ButtonModule,
     CarouselModule,
     TagModule,
+    RatingModule,
     FormsModule,
     NzPageHeaderModule,
     BrowserAnimationsModule,
@@ -99,6 +101,7 @@ registerLocaleData(en)
   providers: [
     UsersApi,
     ProjectsApi,
+    FeedBacksApi,
     provideAnimationsAsync(),
     providePrimeNG({
       theme: {

@@ -8,6 +8,16 @@
     .p-carousel-item-list {
         gap: 1em;
     }
+
+    .feedback-card {
+        min-height: 17em;
+        > .ant-card-body {
+            display: flex;
+            flex-direction: column;
+            gap: 1em;
+            padding: 1.5em;
+        }
+}
 }
 
 :host {
@@ -44,4 +54,10 @@
     height: 10em;
     width: 10em;
 }
+
+.extra-container {
+    display: flex;
+    gap: 1em;
+}
+
 

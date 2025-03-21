@@ -5,11 +5,13 @@ import { selectCurrentUser } from 'src/services/states/users/users.selectors';
 // import { refreshUser } from '../utils/entities/user-utils';
 import {
   ProjectListResponse,
-  ProjectResponse,
   ProjectStatusEnum,
   UserResponse,
 } from 'src/services';
 import { selectProjects } from 'src/services/states/projects/projects.selectors';
+import { FeedbackState } from 'src/services/states/feedbacks/feedbacks.reducers';
+import { selectFeedbacks } from 'src/services/states/feedbacks/feedbacks.selectors';
+import { getRatingSeverity } from '../utils/feedbacks/feedbacks-utils';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -22,9 +24,12 @@ export class HomeComponent implements OnInit {
   userMainJob: string;
   userProjects$: Observable<ProjectListResponse | undefined> =
     new Observable<ProjectListResponse>();
+  userFeedbacks$: Observable<FeedbackState | undefined> =
+    new Observable<FeedbackState>();
   constructor(private store: Store) {
     this.currentUser$ = this.store.select(selectCurrentUser);
     this.userProjects$ = this.store.select(selectProjects);
+    this.userFeedbacks$ = this.store.select(selectFeedbacks);
     this.userMainJob = '';
   }
 
@@ -35,6 +40,9 @@ export class HomeComponent implements OnInit {
       if (user) {
         this.userMainJob = user.main_job ?? '';
       }
+    });
+    this.userFeedbacks$.subscribe(f => {
+      console.log(f);
     });
   }
   getSeverity(status: ProjectStatusEnum) {
@@ -48,5 +56,8 @@ export class HomeComponent implements OnInit {
       case ProjectStatusEnum.Proposed:
         return 'info';
     }
+  }
+  getRating(rating: number) {
+    return getRatingSeverity(rating);
   }
 }

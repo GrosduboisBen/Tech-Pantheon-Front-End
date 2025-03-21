@@ -18,20 +18,24 @@
             </p>
         </div>
     </nz-card>
-    <div nz-row class="row-container" *ngIf="userProjects$ | async as projects">
+    <div nz-row class="row-container">
         <nz-card
-        class="main-card pale-card"
-        nzHoverable nz-col
-        [nzSpan]="11"
-        [nzExtra]="extraTemplate"
-        nzTitle="Projects">
-        <ng-template #extraTemplate>
-            <p-tag 
-            [value]="`Total : ${projects.projects.length}`"
-            [severity]="'secondary'">
-            </p-tag>
-        </ng-template>
-        <!-- TODO Add Carousel responsive options -->
+            *ngIf="userProjects$ | async as projects"
+            class="main-card pale-card"
+            nzHoverable nz-col
+            [nzSpan]="11"
+            [nzExtra]="extraTemplate"
+            nzTitle="Projects">
+            <ng-template #extraTemplate>
+                <div class="extra-container">
+                    <p-tag 
+                    [value]="`Total : ${projects.projects.length}`"
+                    [severity]="'secondary'">
+                    </p-tag>
+                    <button nz-button>View all</button>
+                </div>
+            </ng-template>
+            <!-- TODO Add Carousel responsive options -->
             <p-carousel class="row-container" [value]="projects.projects" [numVisible]="3" [numScroll]="3" [circular]="false" [showIndicators]="false">
                 <ng-template let-project #item>
                     <nz-card
@@ -46,14 +50,52 @@
                     </nz-card>
                     <ng-template #coverTemplate>
                         <img alt="example" src="assets/techpanth.png" />
-                        <p-tag 
-                        [value]="project.status"
-                        [severity]="getSeverity(project.status)">
-                        </p-tag>
+                        <p-tag [value]="project.status" [severity]="getSeverity(project.status)"/>
                     </ng-template>
                 </ng-template>
             </p-carousel>
         </nz-card>
+        <nz-card
+            *ngIf="userFeedbacks$ | async as feedbacks" 
+            class="main-card pale-card" 
+            nzHoverable
+            nz-col
+            nzSpan="11"
+            nzTitle="Feedbacks"
+            [nzExtra]="totalFeedBackTemplate">
+            <ng-template #totalFeedBackTemplate>
+                <div class="extra-container">
+                    <p-tag 
+                    [value]="`Total : ${feedbacks.total}`"
+                    [severity]="'secondary'">
+                    </p-tag>
+                    <p-tag 
+                    [value]="`Average : ${feedbacks.averageRating}`"
+                    [severity]="getRating(feedbacks.averageRating)">
+                    </p-tag>
+                </div>
+            </ng-template>
+            <p-carousel class="row-container" [value]="feedbacks.feedbacks" [numVisible]="3" [numScroll]="3" [circular]="false" [showIndicators]="false">
+                <ng-template let-feedback #item>
+                    <nz-card
+                    class="feedback-card"
+                    nzHoverable
+                    nz-col
+                    nzTitle="{{feedback.user_name}}"
+                    [nzSpan]="20"
+                    [nzExtra]="feedBackExtraTemplate">
+                        <ng-template #feedBackExtraTemplate>
+                            <p-tag [value]="feedback.project_name" [severity]="'secondary'"/>
+                        </ng-template>
+                        <div>{{feedback.feedback}}</div>
+                        <p-rating [(ngModel)]="feedback.rating" [readonly]="true"></p-rating>
+                    </nz-card>
+                </ng-template>
+            </p-carousel>
+            
+        </nz-card>
+    </div>
+    <div nz-row class="row-container">
         <nz-card class="main-card pale-card" 
             nzHoverable
             nz-col
@@ -61,17 +103,6 @@
             nzTitle="Resume">
             <nz-card>
                 WIP ( CDN for preview )
-            </nz-card>
-        </nz-card>
-    </div>
-    <div nz-row class="row-container">
-        <nz-card class="main-card" 
-            nzHoverable
-            nz-col
-            nzSpan="11"
-            nzTitle="Feedbacks">
-            <nz-card>
-                WIP ( Feedbacks custom route for preview )
             </nz-card>
         </nz-card>
         <nz-card class="main-card"
