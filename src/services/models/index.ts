@@ -6,6 +6,7 @@ export * from './CustomBlockCreate';
 export * from './CustomBlockListResponse';
 export * from './CustomBlockResponse';
 export * from './CustomBlockUpdate';
+export * from './FeedBackCustomResponse';
 export * from './FeedbackCreate';
 export * from './FeedbackListResponse';
 export * from './FeedbackResponse';

@@ -16,6 +16,7 @@ import type { AjaxResponse } from 'rxjs/ajax';
 import { BaseAPI, throwIfNullOrUndefined, encodeURI } from '../runtime';
 import type { OperationOpts, HttpHeaders, HttpQuery } from '../runtime';
 import type {
+    FeedBackCustomResponse,
     FeedbackCreate,
     FeedbackListResponse,
     FeedbackResponse,
@@ -38,6 +39,10 @@ export interface ReadFeedbackApiFeedbacksFeedbackIdGetRequest {
 export interface ReadFeedbacksApiFeedbacksGetRequest {
     page?: number;
     pageSize?: number;
+}
+
+export interface ReadFeedbacksApiFeedbacksHandlerHandlerIdGetRequest {
+    handlerId: string;
 }
 
 export interface UpdateApiFeedbacksFeedbackIdPutRequest {
@@ -118,6 +123,21 @@ export class FeedBacksApi extends BaseAPI {
             url: '/api/feedbacks/',
             method: 'GET',
             query,
+        }, opts?.responseOpts);
+    };
+
+    /**
+     * Retrieve all feedbacks for a given user by its ID.
+     * Read Feedbacks
+     */
+    readFeedbacksApiFeedbacksHandlerHandlerIdGet({ handlerId }: ReadFeedbacksApiFeedbacksHandlerHandlerIdGetRequest): Observable<Array<FeedBackCustomResponse>>
+    readFeedbacksApiFeedbacksHandlerHandlerIdGet({ handlerId }: ReadFeedbacksApiFeedbacksHandlerHandlerIdGetRequest, opts?: OperationOpts): Observable<AjaxResponse<Array<FeedBackCustomResponse>>>
+    readFeedbacksApiFeedbacksHandlerHandlerIdGet({ handlerId }: ReadFeedbacksApiFeedbacksHandlerHandlerIdGetRequest, opts?: OperationOpts): Observable<Array<FeedBackCustomResponse> | AjaxResponse<Array<FeedBackCustomResponse>>> {
+        throwIfNullOrUndefined(handlerId, 'handlerId', 'readFeedbacksApiFeedbacksHandlerHandlerIdGet');
+
+        return this.request<Array<FeedBackCustomResponse>>({
+            url: '/api/feedbacks/handler/{handler_id}'.replace('{handler_id}', encodeURI(handlerId)),
+            method: 'GET',
         }, opts?.responseOpts);
     };
 
