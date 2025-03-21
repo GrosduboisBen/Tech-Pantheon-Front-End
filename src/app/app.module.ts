@@ -37,8 +37,10 @@ import { API_CONFIG } from 'src/services/servers';
 import { UsersComponent } from './components/users/users.component'; // Importer la configuration de l'API
 import { headerReducer } from 'src/services/states/headers/headers.reducers';
 import { projectReducer } from 'src/services/states/projects/projects.reducers';
+import { feedbackReducer } from 'src/services/states/feedbacks/feedbacks.reducers';
 import { HeadersEffects } from 'src/services/states/headers/headers.effects';
 import { ProjectEffects } from 'src/services/states/projects/projects.effects';
+import { FeedbacksEffects } from 'src/services/states/feedbacks/feedbacks.effects';
 import { NzImageModule } from 'ng-zorro-antd/image';
 import { NzGridModule } from 'ng-zorro-antd/grid';
 import { NzCardModule } from 'ng-zorro-antd/card';
@@ -50,7 +52,7 @@ import { ButtonModule } from 'primeng/button';
 import { CarouselModule } from 'primeng/carousel';
 import { TagModule } from 'primeng/tag';
 
-registerLocaleData(en);
+registerLocaleData(en)
 
 @NgModule({
   declarations: [
@@ -84,8 +86,14 @@ registerLocaleData(en);
       singleUser: singleUserReducer,
       headers: headerReducer,
       projects: projectReducer,
+      feedbacks: feedbackReducer,
     }),
-    EffectsModule.forRoot([UserEffects, HeadersEffects, ProjectEffects]),
+    EffectsModule.forRoot([
+      UserEffects,
+      HeadersEffects,
+      ProjectEffects,
+      FeedbacksEffects,
+    ]),
     StoreDevtoolsModule.instrument({ maxAge: 25 }),
   ],
   providers: [

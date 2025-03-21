@@ -12,7 +12,7 @@ import {
 import { of } from 'rxjs';
 import { ProjectsApi } from '../../apis';
 import { select, Store } from '@ngrx/store';
-import { CurrentUserState, UserState } from '../users/users.reducers';
+import { CurrentUserState } from '../users/users.reducers';
 import { ProjectState } from './projects.reducers';
 
 @Injectable()

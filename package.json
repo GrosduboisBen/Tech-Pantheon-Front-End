@@ -24,6 +24,8 @@
     "@ngrx/store": "^19.0.0",
     "@ngrx/store-devtools": "^19.0.0",
     "@primeng/themes": "^19.0.10",
+    "@types/lodash": "^4.17.16",
+    "lodash": "^4.17.21",
     "ng-zorro-antd": "^19.1.0",
     "ngx-scrollbar": "^18.0.0",
     "primeng": "^19.0.10",

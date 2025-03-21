@@ -6,7 +6,7 @@ export const selectHeaderState = createFeatureSelector<HeaderState>('headers');
 export const selectHeaderTitle = createSelector(
   selectHeaderState,
   (state: HeaderState) => {
-    return state.title
+    return state.title;
   }
 );
 
