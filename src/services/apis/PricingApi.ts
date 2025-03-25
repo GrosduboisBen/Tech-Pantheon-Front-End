@@ -21,6 +21,7 @@ import type {
     PricingListResponse,
     PricingResponse,
     PricingUpdate,
+    UserPricing,
 } from '../models';
 
 export interface CreateApiPricingPostRequest {
@@ -38,6 +39,10 @@ export interface ReadPricingApiPricingGetRequest {
 
 export interface ReadPricingEntryApiPricingPricingIdGetRequest {
     pricingId: string;
+}
+
+export interface ReadUserPricingApiPricingUserUserIdGetRequest {
+    userId: string;
 }
 
 export interface UpdateApiPricingPricingIdPutRequest {
@@ -117,6 +122,21 @@ export class PricingApi extends BaseAPI {
 
         return this.request<PricingResponse>({
             url: '/api/pricing/{pricing_id}'.replace('{pricing_id}', encodeURI(pricingId)),
+            method: 'GET',
+        }, opts?.responseOpts);
+    };
+
+    /**
+     * Retrieve a list of pricing informations by user ID.
+     * Read User Pricing
+     */
+    readUserPricingApiPricingUserUserIdGet({ userId }: ReadUserPricingApiPricingUserUserIdGetRequest): Observable<Array<UserPricing>>
+    readUserPricingApiPricingUserUserIdGet({ userId }: ReadUserPricingApiPricingUserUserIdGetRequest, opts?: OperationOpts): Observable<AjaxResponse<Array<UserPricing>>>
+    readUserPricingApiPricingUserUserIdGet({ userId }: ReadUserPricingApiPricingUserUserIdGetRequest, opts?: OperationOpts): Observable<Array<UserPricing> | AjaxResponse<Array<UserPricing>>> {
+        throwIfNullOrUndefined(userId, 'userId', 'readUserPricingApiPricingUserUserIdGet');
+
+        return this.request<Array<UserPricing>>({
+            url: '/api/pricing/user/{user_id}'.replace('{user_id}', encodeURI(userId)),
             method: 'GET',
         }, opts?.responseOpts);
     };

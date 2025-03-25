@@ -55,6 +55,7 @@ export * from './TechnologyResponse';
 export * from './TechnologyUpdate';
 export * from './UserCreate';
 export * from './UserListResponse';
+export * from './UserPricing';
 export * from './UserResponse';
 export * from './UserUpdate';
 export * from './ValidationError';
