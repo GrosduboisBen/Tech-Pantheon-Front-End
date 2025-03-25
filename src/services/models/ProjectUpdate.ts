@@ -24,42 +24,47 @@ export interface ProjectUpdate {
      * @type {string}
      * @memberof ProjectUpdate
      */
-    title: string | null;
+    title?: string | null;
     /**
      * @type {string}
      * @memberof ProjectUpdate
      */
-    description: string | null;
+    description?: string | null;
     /**
      * @type {ProjectStatusEnum}
      * @memberof ProjectUpdate
      */
-    status: ProjectStatusEnum | null;
+    status?: ProjectStatusEnum | null;
     /**
      * @type {string}
      * @memberof ProjectUpdate
      */
-    start_date: string | null;
+    start_date?: string | null;
     /**
      * @type {string}
      * @memberof ProjectUpdate
      */
-    end_date: string | null;
+    end_date?: string | null;
     /**
      * @type {number}
      * @memberof ProjectUpdate
      */
-    total_price: number | null;
+    total_price?: number | null;
     /**
      * @type {string}
      * @memberof ProjectUpdate
      */
-    client_id: string | null;
+    client_id?: string | null;
+    /**
+     * @type {string}
+     * @memberof ProjectUpdate
+     */
+    handler_id?: string | null;
     /**
      * @type {number}
      * @memberof ProjectUpdate
      */
-    tax_rate: number | null;
+    tax_rate?: number | null;
 }
 
 

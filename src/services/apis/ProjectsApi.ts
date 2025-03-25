@@ -36,6 +36,20 @@ export interface ListProjectsApiProjectsGetRequest {
     page?: number;
     pageSize?: number;
     clientId?: string | null;
+    handlerId?: string | null;
+    title?: string | null;
+    startDate?: string | null;
+    endDate?: string | null;
+    totalPriceMin?: number | null;
+    totalPriceMax?: number | null;
+    status?: ProjectStatusEnum | null;
+}
+
+export interface ReadProjectApiProjectsHandlerHandlerIdGetRequest {
+    handlerId: string;
+    page?: number | null;
+    pageSize?: number | null;
+    clientId?: string | null;
     title?: string | null;
     startDate?: string | null;
     endDate?: string | null;
@@ -98,15 +112,16 @@ export class ProjectsApi extends BaseAPI {
      * Retrieve a list of projects with optional filters.
      * List Projects
      */
-    listProjectsApiProjectsGet({ page, pageSize, clientId, title, startDate, endDate, totalPriceMin, totalPriceMax, status }: ListProjectsApiProjectsGetRequest): Observable<ProjectListResponse>
-    listProjectsApiProjectsGet({ page, pageSize, clientId, title, startDate, endDate, totalPriceMin, totalPriceMax, status }: ListProjectsApiProjectsGetRequest, opts?: OperationOpts): Observable<AjaxResponse<ProjectListResponse>>
-    listProjectsApiProjectsGet({ page, pageSize, clientId, title, startDate, endDate, totalPriceMin, totalPriceMax, status }: ListProjectsApiProjectsGetRequest, opts?: OperationOpts): Observable<ProjectListResponse | AjaxResponse<ProjectListResponse>> {
+    listProjectsApiProjectsGet({ page, pageSize, clientId, handlerId, title, startDate, endDate, totalPriceMin, totalPriceMax, status }: ListProjectsApiProjectsGetRequest): Observable<ProjectListResponse>
+    listProjectsApiProjectsGet({ page, pageSize, clientId, handlerId, title, startDate, endDate, totalPriceMin, totalPriceMax, status }: ListProjectsApiProjectsGetRequest, opts?: OperationOpts): Observable<AjaxResponse<ProjectListResponse>>
+    listProjectsApiProjectsGet({ page, pageSize, clientId, handlerId, title, startDate, endDate, totalPriceMin, totalPriceMax, status }: ListProjectsApiProjectsGetRequest, opts?: OperationOpts): Observable<ProjectListResponse | AjaxResponse<ProjectListResponse>> {
 
         const query: HttpQuery = {};
 
         if (page != null) { query['page'] = page; }
         if (pageSize != null) { query['page_size'] = pageSize; }
         if (clientId != null) { query['client_id'] = clientId; }
+        if (handlerId != null) { query['handler_id'] = handlerId; }
         if (title != null) { query['title'] = title; }
         if (startDate != null) { query['start_date'] = (startDate as any).toISOString().split('T')[0]; }
         if (endDate != null) { query['end_date'] = (endDate as any).toISOString().split('T')[0]; }
@@ -122,15 +137,43 @@ export class ProjectsApi extends BaseAPI {
     };
 
     /**
+     * Retrieve a project by handler ID.
+     * Read Project
+     */
+    readProjectApiProjectsHandlerHandlerIdGet({ handlerId, page, pageSize, clientId, title, startDate, endDate, totalPriceMin, totalPriceMax, status }: ReadProjectApiProjectsHandlerHandlerIdGetRequest): Observable<ProjectListResponse>
+    readProjectApiProjectsHandlerHandlerIdGet({ handlerId, page, pageSize, clientId, title, startDate, endDate, totalPriceMin, totalPriceMax, status }: ReadProjectApiProjectsHandlerHandlerIdGetRequest, opts?: OperationOpts): Observable<AjaxResponse<ProjectListResponse>>
+    readProjectApiProjectsHandlerHandlerIdGet({ handlerId, page, pageSize, clientId, title, startDate, endDate, totalPriceMin, totalPriceMax, status }: ReadProjectApiProjectsHandlerHandlerIdGetRequest, opts?: OperationOpts): Observable<ProjectListResponse | AjaxResponse<ProjectListResponse>> {
+        throwIfNullOrUndefined(handlerId, 'handlerId', 'readProjectApiProjectsHandlerHandlerIdGet');
+
+        const query: HttpQuery = {};
+
+        if (page != null) { query['page'] = page; }
+        if (pageSize != null) { query['page_size'] = pageSize; }
+        if (clientId != null) { query['client_id'] = clientId; }
+        if (title != null) { query['title'] = title; }
+        if (startDate != null) { query['start_date'] = (startDate as any).toISOString().split('T')[0]; }
+        if (endDate != null) { query['end_date'] = (endDate as any).toISOString().split('T')[0]; }
+        if (totalPriceMin != null) { query['total_price_min'] = totalPriceMin; }
+        if (totalPriceMax != null) { query['total_price_max'] = totalPriceMax; }
+        if (status != null) { query['status'] = status; }
+
+        return this.request<ProjectListResponse>({
+            url: '/api/projects/handler/{handler_id}'.replace('{handler_id}', encodeURI(handlerId)),
+            method: 'GET',
+            query,
+        }, opts?.responseOpts);
+    };
+
+    /**
      * Retrieve a project by ID.
      * Read Project
      */
-    readProjectApiProjectsProjectIdGet({ projectId }: ReadProjectApiProjectsProjectIdGetRequest): Observable<ProjectResponse>
-    readProjectApiProjectsProjectIdGet({ projectId }: ReadProjectApiProjectsProjectIdGetRequest, opts?: OperationOpts): Observable<AjaxResponse<ProjectResponse>>
-    readProjectApiProjectsProjectIdGet({ projectId }: ReadProjectApiProjectsProjectIdGetRequest, opts?: OperationOpts): Observable<ProjectResponse | AjaxResponse<ProjectResponse>> {
+    readProjectApiProjectsProjectIdGet({ projectId }: ReadProjectApiProjectsProjectIdGetRequest): Observable<ProjectListResponse>
+    readProjectApiProjectsProjectIdGet({ projectId }: ReadProjectApiProjectsProjectIdGetRequest, opts?: OperationOpts): Observable<AjaxResponse<ProjectListResponse>>
+    readProjectApiProjectsProjectIdGet({ projectId }: ReadProjectApiProjectsProjectIdGetRequest, opts?: OperationOpts): Observable<ProjectListResponse | AjaxResponse<ProjectListResponse>> {
         throwIfNullOrUndefined(projectId, 'projectId', 'readProjectApiProjectsProjectIdGet');
 
-        return this.request<ProjectResponse>({
+        return this.request<ProjectListResponse>({
             url: '/api/projects/{project_id}'.replace('{project_id}', encodeURI(projectId)),
             method: 'GET',
         }, opts?.responseOpts);

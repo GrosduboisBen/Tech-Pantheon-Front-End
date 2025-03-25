@@ -1,1 +1,152 @@
-<p>home works!</p>
+<div class="home-main-container">
+    <div nz-row class="row-container">
+        <nz-card nzHoverable class="compact-card pale-card"
+            *ngIf="currentUser$ | async as user;"
+            nzTitle={{userMainJob}}
+            nz-col
+            [nzSpan]="16">
+            <div nz-row class="row-container">
+                <img
+                    nz-image
+                    nzDisablePreview
+                    width="50em"
+                    height="50em"
+                    nzSrc="assets/techpanth.png"
+                    alt=""
+                />
+                <p 
+                    nz-col
+                    [nzSpan]="20">
+                    {{user.description}}
+                </p>
+            </div>
+        </nz-card>
+         <!-- USER PRICING CONTAINER -->
+         <!-- TODO: ADD Technologies from missions -->
+         <ng-scrollbar
+            visibility="hover"
+            [thumbClass]="'scrollbar'"
+            externalViewport
+            nz-col
+            nzSpan="6"
+            class="compact-card">
+            <nz-card 
+                *ngIf="userPricing$ | async as pricings"
+                scrollViewport
+                class="compact-card pricing-card"
+                nzHoverable
+                nz-col
+                nzSpan="11"
+                nzTitle="Pricings"
+                [nzExtra]="pricingExtraTemplate">
+                <nz-card *ngFor="let pricing of pricings.pricings" class="row-container">
+                    <div class="extra-container">
+                        <p-tag [value]="pricing.tag_name" severity="info"/>
+                        <p-tag [value]="`${pricing.price_per_day} €`" severity="secondary"/>
+                    </div>
+                </nz-card>
+                <ng-template #pricingExtraTemplate>
+                    <div class="extra-container">
+                        <p-tag [value]="`Average Pricing : ${pricings.averagePricing} €`" severity="secondary"/>
+                    </div>
+                </ng-template>
+            </nz-card>
+        </ng-scrollbar>
+    </div>
+    <div nz-row class="row-container">
+        <!-- USER PROJECTS CONTAINER -->
+        <nz-card
+            *ngIf="userProjects$ | async as projects"
+            class="main-card pale-card"
+            nzHoverable
+            nz-col
+            [nzSpan]="11"
+            [nzExtra]="extraTemplate"
+            nzTitle="Projects">
+            <ng-template #extraTemplate>
+                <div class="extra-container">
+                    <p-tag 
+                    [value]="`Total : ${projects.projects.length}`"
+                    [severity]="'secondary'">
+                    </p-tag>
+                    <button nz-button>View all</button>
+                </div>
+            </ng-template>
+            <!-- TODO Add Carousel responsive options -->
+            <p-carousel class="row-container" [value]="projects.projects" [numVisible]="3" [numScroll]="3" [circular]="false" [showIndicators]="false">
+                <ng-template let-project #item>
+                    <nz-card
+                        nzHoverable
+                        nz-col
+                        [nzSpan]="20"
+                        [nzCover]="coverTemplate">
+                        <nz-card-meta
+                            nzTitle="{{project.title}}"
+                            nzDescription="This is the description">
+                        </nz-card-meta>
+                    </nz-card>
+                    <ng-template #coverTemplate>
+                        <img alt="example" src="assets/techpanth.png" />
+                        <p-tag [value]="project.status" [severity]="getSeverity(project.status)"/>
+                    </ng-template>
+                </ng-template>
+            </p-carousel>
+        </nz-card>
+        <!-- USER FEEDBACKS CONTAINER -->
+        <nz-card
+            *ngIf="userFeedbacks$ | async as feedbacks" 
+            class="main-card pale-card" 
+            nzHoverable
+            nz-col
+            nzSpan="11"
+            nzTitle="Feedbacks"
+            [nzExtra]="totalFeedBackTemplate">
+            <ng-template #totalFeedBackTemplate>
+                <div class="extra-container">
+                    <p-tag 
+                    [value]="`Total : ${feedbacks.total}`"
+                    [severity]="'secondary'">
+                    </p-tag>
+                    <p-tag 
+                    [value]="`Average Rating : ${feedbacks.averageRating}`"
+                    [severity]="getRating(feedbacks.averageRating)">
+                    </p-tag>
+                </div>
+            </ng-template>
+            <p-carousel class="row-container" [value]="feedbacks.feedbacks" [numVisible]="3" [numScroll]="3" [circular]="false" [showIndicators]="false">
+                <ng-template let-feedback #item>
+                    <nz-card
+                    class="feedback-card"
+                    nzHoverable
+                    nz-col
+                    nzTitle="{{feedback.user_name}}"
+                    [nzSpan]="20"
+                    [nzExtra]="feedBackExtraTemplate">
+                        <ng-template #feedBackExtraTemplate>
+                            <p-tag [value]="feedback.project_name" [severity]="'secondary'"/>
+                        </ng-template>
+                        <div>{{feedback.feedback}}</div>
+                        <p-rating [(ngModel)]="feedback.rating" [readonly]="true"></p-rating>
+                    </nz-card>
+                </ng-template>
+            </p-carousel>
+            
+        </nz-card>
+    </div>
+    <div nz-row class="row-container">
+        <nz-card class="main-card pale-card" 
+            nzHoverable
+            nz-col
+            nzSpan="22"
+            nzTitle="Resume">
+            <nz-card>
+                WIP ( CDN for preview )
+            </nz-card>
+        </nz-card>
+    </div>
+</div>
+
+<ng-template #pictureTemplate>
+    <img alt="example" src="assets/techpanth.png" />
+</ng-template>
+

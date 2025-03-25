@@ -1,7 +1,83 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+import { selectCurrentUser } from 'src/services/states/users/users.selectors';
+// import { refreshUser } from '../utils/entities/user-utils';
+import {
+  ProjectListResponse,
+  ProjectStatusEnum,
+  UserResponse,
+} from 'src/services';
+import { selectProjects } from 'src/services/states/projects/projects.selectors';
+import { FeedbackState } from 'src/services/states/feedbacks/feedbacks.reducers';
+import { selectFeedbacks } from 'src/services/states/feedbacks/feedbacks.selectors';
+import { getRatingSeverity } from '../utils/feedbacks/feedbacks-utils';
+import { PricingState } from 'src/services/states/pricings/pricings.reducers';
+import { selectPricing } from 'src/services/states/pricings/pricings.selectors';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
+  standalone: false,
 })
-export class HomeComponent {}
+export class HomeComponent implements OnInit {
+  /**
+   * Logged User
+   */
+  currentUser$: Observable<UserResponse | undefined> =
+    new Observable<UserResponse>();
+  /**
+   * Main User Job
+   */
+  userMainJob: string;
+  /**
+   * Observable user's projects.
+   */
+  userProjects$: Observable<ProjectListResponse | undefined> =
+    new Observable<ProjectListResponse>();
+  /**
+   * Observable user's feedbacks.
+   */
+  userFeedbacks$: Observable<FeedbackState | undefined> =
+    new Observable<FeedbackState>();
+
+  userPricing$: Observable<PricingState | undefined> =
+    new Observable<PricingState>();
+
+  constructor(private store: Store) {
+    this.currentUser$ = this.store.select(selectCurrentUser);
+    this.userProjects$ = this.store.select(selectProjects);
+    this.userFeedbacks$ = this.store.select(selectFeedbacks);
+    this.userPricing$ = this.store.select(selectPricing);
+
+    this.userMainJob = '';
+  }
+
+  ngOnInit(): void {
+    // TODO: ADD Authentication logic.
+    this.userProjects$ = this.store.select(selectProjects);
+    this.store.select(selectCurrentUser).subscribe(user => {
+      if (user) {
+        this.userMainJob = user.main_job ?? '';
+      }
+    });
+    this.userPricing$.subscribe(pricings => {
+      console.log(pricings);
+    });
+  }
+  getSeverity(status: ProjectStatusEnum) {
+    switch (status) {
+      case ProjectStatusEnum.Canceled:
+        return 'danger';
+      case ProjectStatusEnum.InProgress:
+        return 'warn';
+      case ProjectStatusEnum.Completed:
+        return 'success';
+      case ProjectStatusEnum.Proposed:
+        return 'info';
+    }
+  }
+  getRating(rating: number) {
+    return getRatingSeverity(rating);
+  }
+}

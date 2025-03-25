@@ -1,6 +1,10 @@
 <!-- NG-ZORRO -->
-<app-header>
-
-</app-header>
-
-<app-side-menu></app-side-menu>
+<ng-scrollbar
+visibility="hover"
+[thumbClass]="'scrollbar'"	>
+   <app-header></app-header>
+    <div class="main-container">
+       <app-side-menu></app-side-menu>
+       <router-outlet></router-outlet>
+    </div>
+</ng-scrollbar>

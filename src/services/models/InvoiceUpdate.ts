@@ -20,25 +20,25 @@ export interface InvoiceUpdate {
      * @type {string}
      * @memberof InvoiceUpdate
      */
-    reference: string | null;
+    reference?: string | null;
     /**
      * @type {string}
      * @memberof InvoiceUpdate
      */
-    user_id: string | null;
+    user_id?: string | null;
     /**
      * @type {string}
      * @memberof InvoiceUpdate
      */
-    project_id: string | null;
+    project_id?: string | null;
     /**
      * @type {string}
      * @memberof InvoiceUpdate
      */
-    validation_status: string | null;
+    validation_status?: string | null;
     /**
      * @type {string}
      * @memberof InvoiceUpdate
      */
-    updated_at: string | null;
+    updated_at?: string | null;
 }

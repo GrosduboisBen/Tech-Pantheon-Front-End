@@ -20,20 +20,20 @@ export interface TechnologyUpdate {
      * @type {string}
      * @memberof TechnologyUpdate
      */
-    name: string | null;
+    name?: string | null;
     /**
      * @type {string}
      * @memberof TechnologyUpdate
      */
-    description: string | null;
+    description?: string | null;
     /**
      * @type {string}
      * @memberof TechnologyUpdate
      */
-    tag_id: string | null;
+    tag_id?: string | null;
     /**
      * @type {string}
      * @memberof TechnologyUpdate
      */
-    language: string | null;
+    language?: string | null;
 }

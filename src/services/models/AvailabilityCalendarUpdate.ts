@@ -20,25 +20,25 @@ export interface AvailabilityCalendarUpdate {
      * @type {string}
      * @memberof AvailabilityCalendarUpdate
      */
-    user_id: string | null;
+    user_id?: string | null;
     /**
      * @type {string}
      * @memberof AvailabilityCalendarUpdate
      */
-    start_date: string | null;
+    start_date?: string | null;
     /**
      * @type {string}
      * @memberof AvailabilityCalendarUpdate
      */
-    end_date: string | null;
+    end_date?: string | null;
     /**
      * @type {string}
      * @memberof AvailabilityCalendarUpdate
      */
-    status: string | null;
+    status?: string | null;
     /**
      * @type {string}
      * @memberof AvailabilityCalendarUpdate
      */
-    note: string | null;
+    note?: string | null;
 }

@@ -20,20 +20,20 @@ export interface FeedbackUpdate {
      * @type {string}
      * @memberof FeedbackUpdate
      */
-    user_id: string | null;
+    user_id?: string | null;
     /**
      * @type {string}
      * @memberof FeedbackUpdate
      */
-    project_id: string | null;
+    project_id?: string | null;
     /**
      * @type {string}
      * @memberof FeedbackUpdate
      */
-    feedback: string | null;
+    feedback?: string | null;
     /**
      * @type {number}
      * @memberof FeedbackUpdate
      */
-    rating: number | null;
+    rating?: number | null;
 }

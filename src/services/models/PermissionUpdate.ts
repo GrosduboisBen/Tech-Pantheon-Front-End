@@ -20,15 +20,15 @@ export interface PermissionUpdate {
      * @type {string}
      * @memberof PermissionUpdate
      */
-    role_id: string | null;
+    role_id?: string | null;
     /**
      * @type {string}
      * @memberof PermissionUpdate
      */
-    name: string | null;
+    name?: string | null;
     /**
      * @type {string}
      * @memberof PermissionUpdate
      */
-    description: string | null;
+    description?: string | null;
 }

@@ -1,10 +1,10 @@
 import { createAction, props } from '@ngrx/store';
 import {
   UserCreate,
-  UserUpdate,
-  UserResponse,
   UserListResponse,
-} from 'src/services';
+  UserResponse,
+  UserUpdate,
+} from '../../models';
 
 // Action pour charger tous les utilisateurs
 export const loadUsers = createAction(
@@ -71,10 +71,17 @@ export const deleteUserFailure = createAction(
 );
 
 // Action pour charger un utilisateur spécifique
-export const loadUser = createAction(
-  '[User API] Load User',
+export const loadUserById = createAction(
+  '[User API] Load User by id',
   props<{ userId: string }>()
 );
+
+// TODO Link & uncomment when name filter is implemented on API side.
+
+// export const loadUserByName = createAction(
+//   '[User API] Load User by Name',
+//   props<{ userName: string }>()
+// );
 
 export const loadUserSuccess = createAction(
   '[User API] Load User Success',

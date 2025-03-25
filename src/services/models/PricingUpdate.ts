@@ -20,15 +20,15 @@ export interface PricingUpdate {
      * @type {string}
      * @memberof PricingUpdate
      */
-    tag_id: string | null;
+    tag_id?: string | null;
     /**
      * @type {string}
      * @memberof PricingUpdate
      */
-    user_id: string | null;
+    user_id?: string | null;
     /**
      * @type {number}
      * @memberof PricingUpdate
      */
-    price_per_day: number | null;
+    price_per_day?: number | null;
 }

@@ -1,13 +1,18 @@
 import { Component } from '@angular/core';
-
+import { Store } from '@ngrx/store';
+import { loadUserById } from 'src/services/states/users/users.actions';
+import { selectCurrentUser } from 'src/services/states/users/users.selectors';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.scss'],
+  standalone: false,
 })
 export class AppComponent {
-  title = 'portfolio';
-  constructor(){
-    
+  constructor(private store: Store) {
+    this.store.dispatch(
+      //TODO: Trigger on auth when implemented ( no straight ids )
+      loadUserById({ userId: '99aa0321-07d1-49ec-bad3-3fb633cd2729' })
+    );
   }
 }

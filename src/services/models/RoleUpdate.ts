@@ -20,10 +20,10 @@ export interface RoleUpdate {
      * @type {string}
      * @memberof RoleUpdate
      */
-    name: string | null;
+    name?: string | null;
     /**
      * @type {string}
      * @memberof RoleUpdate
      */
-    description: string | null;
+    description?: string | null;
 }

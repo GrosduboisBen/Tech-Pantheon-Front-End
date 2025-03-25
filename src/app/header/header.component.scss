@@ -1,0 +1,16 @@
+@use "src/assets/variables.scss" as variables;
+
+.ant-btn {
+    background-color: rgb(96, 219, 13);
+}
+:host {
+    font-family: 'Quantico-Regular',sans-serif;
+    .header-main-title{
+        color: variables.$app-orange;
+    };
+    .subtitle-container {
+        display: flex;
+        flex-direction: row;
+    }
+}
+

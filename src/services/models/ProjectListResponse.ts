@@ -24,17 +24,17 @@ export interface ProjectListResponse {
      * @type {number}
      * @memberof ProjectListResponse
      */
-    total: number;
+    total?: number | null;
     /**
      * @type {number}
      * @memberof ProjectListResponse
      */
-    page: number;
+    page?: number | null;
     /**
      * @type {number}
      * @memberof ProjectListResponse
      */
-    page_size: number;
+    page_size?: number | null;
     /**
      * @type {Array<ProjectResponse>}
      * @memberof ProjectListResponse

@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Actions, ofType, createEffect } from '@ngrx/effects';
-import { UsersApi } from 'src/services';
 import * as UserActions from './users.actions';
 import { catchError, map, mergeMap } from 'rxjs/operators';
 import { of } from 'rxjs';
+import { UsersApi } from '../../apis';
 
 @Injectable()
 export class UserEffects {
@@ -33,7 +33,7 @@ export class UserEffects {
   // Effet pour charger un utilisateur spécifique
   loadUser$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(UserActions.loadUser),
+      ofType(UserActions.loadUserById),
       mergeMap(action =>
         this.userService
           .readUserApiUsersUserIdGet({ userId: action.userId })

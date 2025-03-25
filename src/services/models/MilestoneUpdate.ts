@@ -20,15 +20,15 @@ export interface MilestoneUpdate {
      * @type {string}
      * @memberof MilestoneUpdate
      */
-    title: string | null;
+    title?: string | null;
     /**
      * @type {string}
      * @memberof MilestoneUpdate
      */
-    description: string | null;
+    description?: string | null;
     /**
      * @type {string}
      * @memberof MilestoneUpdate
      */
-    project_id: string | null;
+    project_id?: string | null;
 }

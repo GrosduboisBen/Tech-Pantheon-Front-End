@@ -1,0 +1,76 @@
+@use '/src/assets/variables.scss';
+
+::ng-deep {
+    .ant-card-head-title {
+        font-weight: bold;
+        color: variables.$app-orange;
+    }
+    .p-carousel-item-list {
+        gap: 1em;
+    }
+
+    .feedback-card {
+        min-height: 17em;
+        > .ant-card-body {
+            display: flex;
+            flex-direction: column;
+            gap: 1em;
+            padding: 1.5em;
+        }
+    }
+    .pricing-card > * {
+        > .ant-card-body {
+            display: flex;
+            flex-direction: column;
+            gap: 1em;
+            padding: 1.5em;
+        }
+    }
+}
+
+:host {
+    width: 100%;
+    
+}
+
+.home-main-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+}
+
+.row-container {
+    display: flex;
+    align-items: start;
+    justify-content: start;
+    gap:1em;
+    width: 100%;
+}
+
+.main-card {
+    height: 30em;
+}
+
+.compact-card {
+    height: 18em;
+    max-height: 18em;
+}
+
+.pale-card {
+    background-color: variables.$main-card-grey;
+}
+
+.child-card {
+    height: max-content;
+}
+.image-container {
+    height: 10em;
+    width: 10em;
+}
+
+.extra-container {
+    display: flex;
+    gap: 1em;
+}
+
+

@@ -30,6 +30,16 @@ export interface UserResponse {
      * @type {string}
      * @memberof UserResponse
      */
+    description: string | null;
+    /**
+     * @type {string}
+     * @memberof UserResponse
+     */
+    main_job: string | null;
+    /**
+     * @type {string}
+     * @memberof UserResponse
+     */
     id: string;
     /**
      * @type {string}

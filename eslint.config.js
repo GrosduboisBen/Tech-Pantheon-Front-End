@@ -36,11 +36,11 @@ module.exports = tseslint.config(
           "error",
           {
             singleQuote: true,
-            printWidth: 80,
             trailingComma: "es5",
             arrowParens: "avoid",
           },
         ],
+        "@angular-eslint/prefer-standalone":"off",
     },
   },
   {

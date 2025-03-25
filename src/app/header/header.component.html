@@ -1,8 +1,38 @@
 
-    <nz-page-header class="site-page-header" nzTitle="Title" nzSubtitle="This is a subtitle">
+    <nz-page-header 
+      class="site-page-header">
+      <div>
+
+      </div>
+      <nz-page-header-title 
+        class="header-main-title"
+        (click)="navigateHome()">
+        <img
+        nz-image
+        nzDisablePreview
+        width="50em"
+        height="50em"
+        nzSrc="assets/techpanth.png"
+        alt=""
+      />
+      <span>
+        Tech Pantheon
+      </span>
+      </nz-page-header-title>
+      <nz-page-header-title></nz-page-header-title>
+
+      <nz-page-header-subtitle>
+        <div class="subtitle-container">
+          <span>
+           
+          </span>
+        </div>
+      </nz-page-header-subtitle>
       <nz-page-header-extra>
+        {{(title$ | async) ?? ''}}
         <nz-space>
         </nz-space>
+        {{(subTitle$ | async) ?? ''}}
       </nz-page-header-extra>
     </nz-page-header>
   
