@@ -54,9 +54,6 @@ export class HomeComponent implements OnInit {
         this.userMainJob = user.main_job ?? '';
       }
     });
-    this.userFeedbacks$.subscribe(f => {
-      console.log(f);
-    });
   }
   getSeverity(status: ProjectStatusEnum) {
     switch (status) {
