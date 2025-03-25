@@ -19,13 +19,26 @@ import { getRatingSeverity } from '../utils/feedbacks/feedbacks-utils';
   standalone: false,
 })
 export class HomeComponent implements OnInit {
+  /**
+   * Logged User
+   */
   currentUser$: Observable<UserResponse | undefined> =
     new Observable<UserResponse>();
+  /**
+   * Main User Job
+   */
   userMainJob: string;
+  /**
+   * Observable user's projects.
+   */
   userProjects$: Observable<ProjectListResponse | undefined> =
     new Observable<ProjectListResponse>();
+  /**
+   * Observable user's feedbacks.
+   */
   userFeedbacks$: Observable<FeedbackState | undefined> =
     new Observable<FeedbackState>();
+
   constructor(private store: Store) {
     this.currentUser$ = this.store.select(selectCurrentUser);
     this.userProjects$ = this.store.select(selectProjects);
