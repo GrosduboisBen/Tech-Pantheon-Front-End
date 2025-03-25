@@ -1,28 +1,65 @@
 <div class="home-main-container">
-    <nz-card nzHoverable class="pale-card"
-        *ngIf="currentUser$ | async as user;"
-        nzTitle={{userMainJob}}>
-        <div nz-row class="row-container">
-            <img
-                nz-image
-                nzDisablePreview
-                width="50em"
-                height="50em"
-                nzSrc="assets/techpanth.png"
-                alt=""
-            />
-            <p 
-                nz-col
-                [nzSpan]="16">
-                {{user.description}}
-            </p>
-        </div>
-    </nz-card>
     <div nz-row class="row-container">
+        <nz-card nzHoverable class="compact-card pale-card"
+            *ngIf="currentUser$ | async as user;"
+            nzTitle={{userMainJob}}
+            nz-col
+            [nzSpan]="16">
+            <div nz-row class="row-container">
+                <img
+                    nz-image
+                    nzDisablePreview
+                    width="50em"
+                    height="50em"
+                    nzSrc="assets/techpanth.png"
+                    alt=""
+                />
+                <p 
+                    nz-col
+                    [nzSpan]="20">
+                    {{user.description}}
+                </p>
+            </div>
+        </nz-card>
+         <!-- USER PRICING CONTAINER -->
+         <!-- TODO: ADD Technologies from missions -->
+         <ng-scrollbar
+            visibility="hover"
+            [thumbClass]="'scrollbar'"
+            externalViewport
+            nz-col
+            nzSpan="6"
+            class="compact-card">
+            <nz-card 
+                *ngIf="userPricing$ | async as pricings"
+                scrollViewport
+                class="compact-card pricing-card"
+                nzHoverable
+                nz-col
+                nzSpan="11"
+                nzTitle="Pricings"
+                [nzExtra]="pricingExtraTemplate">
+                <nz-card *ngFor="let pricing of pricings.pricings" class="row-container">
+                    <div class="extra-container">
+                        <p-tag [value]="pricing.tag_name" severity="info"/>
+                        <p-tag [value]="`${pricing.price_per_day} €`" severity="secondary"/>
+                    </div>
+                </nz-card>
+                <ng-template #pricingExtraTemplate>
+                    <div class="extra-container">
+                        <p-tag [value]="`Average Pricing : ${pricings.averagePricing} €`" severity="secondary"/>
+                    </div>
+                </ng-template>
+            </nz-card>
+        </ng-scrollbar>
+    </div>
+    <div nz-row class="row-container">
+        <!-- USER PROJECTS CONTAINER -->
         <nz-card
             *ngIf="userProjects$ | async as projects"
             class="main-card pale-card"
-            nzHoverable nz-col
+            nzHoverable
+            nz-col
             [nzSpan]="11"
             [nzExtra]="extraTemplate"
             nzTitle="Projects">
@@ -55,6 +92,7 @@
                 </ng-template>
             </p-carousel>
         </nz-card>
+        <!-- USER FEEDBACKS CONTAINER -->
         <nz-card
             *ngIf="userFeedbacks$ | async as feedbacks" 
             class="main-card pale-card" 
@@ -70,7 +108,7 @@
                     [severity]="'secondary'">
                     </p-tag>
                     <p-tag 
-                    [value]="`Average : ${feedbacks.averageRating}`"
+                    [value]="`Average Rating : ${feedbacks.averageRating}`"
                     [severity]="getRating(feedbacks.averageRating)">
                     </p-tag>
                 </div>
@@ -99,19 +137,10 @@
         <nz-card class="main-card pale-card" 
             nzHoverable
             nz-col
-            nzSpan="11"
+            nzSpan="22"
             nzTitle="Resume">
             <nz-card>
                 WIP ( CDN for preview )
-            </nz-card>
-        </nz-card>
-        <nz-card class="main-card"
-            nzHoverable
-            nz-col
-            nzSpan="12"
-            nzTitle="Expertise">
-            <nz-card>
-                WIP ( Pricing & Technologies custom routes for preview )
             </nz-card>
         </nz-card>
     </div>

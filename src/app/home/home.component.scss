@@ -17,7 +17,15 @@
             gap: 1em;
             padding: 1.5em;
         }
-}
+    }
+    .pricing-card > * {
+        > .ant-card-body {
+            display: flex;
+            flex-direction: column;
+            gap: 1em;
+            padding: 1.5em;
+        }
+    }
 }
 
 :host {
@@ -41,6 +49,11 @@
 
 .main-card {
     height: 30em;
+}
+
+.compact-card {
+    height: 18em;
+    max-height: 18em;
 }
 
 .pale-card {
