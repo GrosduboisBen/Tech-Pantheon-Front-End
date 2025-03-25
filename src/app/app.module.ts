@@ -31,7 +31,7 @@ import {
   userListReducer,
 } from '../services/states/users/users.reducers';
 import { UserEffects } from '../services/states/users/users.effects';
-import { FeedBacksApi, UsersApi } from 'src/services';
+import { FeedBacksApi, PricingApi, UsersApi } from 'src/services';
 import { ProjectsApi } from 'src/services';
 import { API_CONFIG } from 'src/services/servers';
 import { UsersComponent } from './components/users/users.component'; // Importer la configuration de l'API
@@ -52,6 +52,8 @@ import { ButtonModule } from 'primeng/button';
 import { CarouselModule } from 'primeng/carousel';
 import { TagModule } from 'primeng/tag';
 import { RatingModule } from 'primeng/rating';
+import { pricingReducer } from 'src/services/states/pricings/pricings.reducers';
+import { PricingEffects } from 'src/services/states/pricings/pricings.effects';
 
 registerLocaleData(en);
 
@@ -89,12 +91,14 @@ registerLocaleData(en);
       headers: headerReducer,
       projects: projectReducer,
       feedbacks: feedbackReducer,
+      pricings: pricingReducer,
     }),
     EffectsModule.forRoot([
       UserEffects,
       HeadersEffects,
       ProjectEffects,
       FeedbacksEffects,
+      PricingEffects,
     ]),
     StoreDevtoolsModule.instrument({ maxAge: 25 }),
   ],
@@ -102,6 +106,7 @@ registerLocaleData(en);
     UsersApi,
     ProjectsApi,
     FeedBacksApi,
+    PricingApi,
     provideAnimationsAsync(),
     providePrimeNG({
       theme: {
