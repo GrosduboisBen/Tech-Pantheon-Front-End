@@ -1,0 +1,11 @@
+.gitignore
+apis/DefaultApi.ts
+apis/index.ts
+index.ts
+models/CreateSubfolderIdSubfolderNamePostRequest.ts
+models/LoginPost200Response.ts
+models/RegisterPostRequest.ts
+models/index.ts
+runtime.ts
+servers.ts
+tsconfig.json

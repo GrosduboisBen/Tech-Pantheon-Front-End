@@ -1,0 +1,274 @@
+openapi: 3.0.1
+info:
+  title: Secure CDN API
+  version: 1.0.0
+  description: API pour la gestion d'un CDN sécurisé avec authentification JWT
+
+servers:
+  - url: http://localhost:3000
+
+paths:
+  /register:
+    post:
+      summary: Register a new user
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [userId, password]
+              properties:
+                userId:
+                  type: string
+                password:
+                  type: string
+      responses:
+        '200':
+          description: User registered and folders created
+        '400':
+          description: Missing userId or password
+        '500':
+          description: Internal server error
+
+  /login:
+    post:
+      summary: Login to obtain a JWT token
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [userId, password]
+              properties:
+                userId:
+                  type: string
+                password:
+                  type: string
+      responses:
+        '200':
+          description: Login successful
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  token:
+                    type: string
+        '400':
+          description: Missing userId or password
+        '401':
+          description: Invalid credentials
+
+  /create-subfolder/{id}/{subfolderName}:
+    post:
+      summary: Create a subfolder inside a user's folder
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: subfolderName
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [subFolderName]
+              properties:
+                subFolderName:
+                  type: string
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Subfolder created
+        '400':
+          description: Subfolder already exists or bad request
+        '403':
+          description: Unauthorized
+        '404':
+          description: Parent folder not found
+        '500':
+          description: Internal server error
+
+  /add/{id}/{fileName}:
+    post:
+      summary: Upload and compress a file into a user's folder
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: fileName
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                file:
+                  type: string
+                  format: binary
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: File uploaded and compressed
+        '400':
+          description: File is required
+        '403':
+          description: Unauthorized to modify folder
+        '404':
+          description: Folder not found
+        '500':
+          description: Error compressing file
+
+  /upload/{id}:
+    post:
+      summary: Upload a file into a user's folder
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                file:
+                  type: string
+                  format: binary
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: File uploaded
+        '403':
+          description: Unauthorized to upload to folder
+        '404':
+          description: Folder not found
+
+  /list/{id}/{folderName}:
+    get:
+      summary: List files in a user's folder
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: folderName
+          required: true
+          schema:
+            type: string
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: List of files in the folder
+        '403':
+          description: Unauthorized to list folder
+        '404':
+          description: Folder not found
+
+  /download/{id}/{fileName}:
+    get:
+      summary: Download and decompress a file from a user's folder
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: fileName
+          required: true
+          schema:
+            type: string
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: File downloaded
+        '403':
+          description: Unauthorized to download file
+        '404':
+          description: File not found
+
+  /delete-folder/{id}/{folderName}:
+    delete:
+      summary: Delete a folder (user or admin)
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: folderName
+          required: true
+          schema:
+            type: string
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Folder deleted
+        '403':
+          description: Unauthorized to delete folder
+        '404':
+          description: Folder not found
+        '500':
+          description: Failed to delete folder
+
+  /delete-file/{id}/{fileName}:
+    delete:
+      summary: Delete a file from a user's folder
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: fileName
+          required: true
+          schema:
+            type: string
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: File deleted
+        '403':
+          description: Unauthorized to delete file
+        '404':
+          description: File not found
+        '500':
+          description: Failed to delete file
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
