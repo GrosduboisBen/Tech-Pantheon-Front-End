@@ -13,12 +13,17 @@
 
 /**
  * @export
- * @interface LoginPost200Response
+ * @interface LoginPostRequest
  */
-export interface LoginPost200Response {
+export interface LoginPostRequest {
     /**
      * @type {string}
-     * @memberof LoginPost200Response
+     * @memberof LoginPostRequest
      */
-    token?: string;
+    userId: string;
+    /**
+     * @type {string}
+     * @memberof LoginPostRequest
+     */
+    password: string;
 }

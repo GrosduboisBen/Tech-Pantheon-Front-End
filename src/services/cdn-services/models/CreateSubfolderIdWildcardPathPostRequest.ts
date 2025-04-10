@@ -13,12 +13,12 @@
 
 /**
  * @export
- * @interface LoginPost200Response
+ * @interface CreateSubfolderIdWildcardPathPostRequest
  */
-export interface LoginPost200Response {
+export interface CreateSubfolderIdWildcardPathPostRequest {
     /**
      * @type {string}
-     * @memberof LoginPost200Response
+     * @memberof CreateSubfolderIdWildcardPathPostRequest
      */
-    token?: string;
+    subFolderName: string;
 }

@@ -1,7 +1,7 @@
 // tslint:disable
 /**
  * Secure CDN API
- * API pour la gestion d\'un CDN sécurisé avec authentification JWT
+ * API for managing a secure CDN with JWT authentication
  *
  * The version of the OpenAPI document: 1.0.0
  * 

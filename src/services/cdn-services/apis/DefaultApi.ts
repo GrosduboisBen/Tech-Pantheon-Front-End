@@ -1,7 +1,7 @@
 // tslint:disable
 /**
  * Secure CDN API
- * API pour la gestion d\'un CDN sécurisé avec authentification JWT
+ * API for managing a secure CDN with JWT authentication
  *
  * The version of the OpenAPI document: 1.0.0
  * 
@@ -16,49 +16,51 @@ import type { AjaxResponse } from 'rxjs/ajax';
 import { BaseAPI, throwIfNullOrUndefined, encodeURI } from '../runtime';
 import type { OperationOpts, HttpHeaders } from '../runtime';
 import type {
-    CreateSubfolderIdSubfolderNamePostRequest,
-    LoginPost200Response,
-    RegisterPostRequest,
+    CreateSubfolderRequest,
+    ListIdWildcardPathGet200Response,
+    LoginRequest,
+    LoginResponse,
+    RegisterRequest,
 } from '../models';
 
-export interface AddIdFileNamePostRequest {
+export interface AddIdWildcardPathPostRequest {
     id: string;
-    fileName: string;
+    wildcardPath: string;
     file?: Blob;
 }
 
-export interface CreateSubfolderIdSubfolderNamePostRequest {
+export interface CreateSubfolderIdWildcardPathPostRequest {
     id: string;
-    subfolderName: string;
-    createSubfolderIdSubfolderNamePostRequest: CreateSubfolderIdSubfolderNamePostRequest;
+    wildcardPath: string;
+    createSubfolderRequest: CreateSubfolderRequest;
 }
 
-export interface DeleteFileIdFileNameDeleteRequest {
+export interface DeleteFileIdWildcardPathDeleteRequest {
     id: string;
-    fileName: string;
+    wildcardPath: string;
 }
 
-export interface DeleteFolderIdFolderNameDeleteRequest {
+export interface DeleteFolderIdWildcardPathDeleteRequest {
     id: string;
-    folderName: string;
+    wildcardPath: string;
 }
 
-export interface DownloadIdFileNameGetRequest {
+export interface DownloadIdWildcardPathGetRequest {
     id: string;
-    fileName: string;
+    wildcardPath: string;
 }
 
-export interface ListIdFolderNameGetRequest {
+export interface ListIdWildcardPathGetRequest {
     id: string;
-    folderName: string;
+    wildcardPath: string;
 }
 
 export interface LoginPostRequest {
-    registerPostRequest: RegisterPostRequest;
+    loginRequest: LoginRequest;
 }
 
 export interface RegisterPostRequest {
-    registerPostRequest: RegisterPostRequest;
+    registerRequest: RegisterRequest;
 }
 
 export interface UploadIdPostRequest {
@@ -74,11 +76,11 @@ export class DefaultApi extends BaseAPI {
     /**
      * Upload and compress a file into a user\'s folder
      */
-    addIdFileNamePost({ id, fileName, file }: AddIdFileNamePostRequest): Observable<void>
-    addIdFileNamePost({ id, fileName, file }: AddIdFileNamePostRequest, opts?: OperationOpts): Observable<void | AjaxResponse<void>>
-    addIdFileNamePost({ id, fileName, file }: AddIdFileNamePostRequest, opts?: OperationOpts): Observable<void | AjaxResponse<void>> {
-        throwIfNullOrUndefined(id, 'id', 'addIdFileNamePost');
-        throwIfNullOrUndefined(fileName, 'fileName', 'addIdFileNamePost');
+    addIdWildcardPathPost({ id, wildcardPath, file }: AddIdWildcardPathPostRequest): Observable<void>
+    addIdWildcardPathPost({ id, wildcardPath, file }: AddIdWildcardPathPostRequest, opts?: OperationOpts): Observable<void | AjaxResponse<void>>
+    addIdWildcardPathPost({ id, wildcardPath, file }: AddIdWildcardPathPostRequest, opts?: OperationOpts): Observable<void | AjaxResponse<void>> {
+        throwIfNullOrUndefined(id, 'id', 'addIdWildcardPathPost');
+        throwIfNullOrUndefined(wildcardPath, 'wildcardPath', 'addIdWildcardPathPost');
 
         const headers: HttpHeaders = {
         };
@@ -87,7 +89,7 @@ export class DefaultApi extends BaseAPI {
         if (file !== undefined) { formData.append('file', file as any); }
 
         return this.request<void>({
-            url: '/add/{id}/{fileName}'.replace('{id}', encodeURI(id)).replace('{fileName}', encodeURI(fileName)),
+            url: '/add/{id}/{wildcardPath}'.replace('{id}', encodeURI(id)).replace('{wildcardPath}', encodeURI(wildcardPath)),
             method: 'POST',
             headers,
             body: formData,
@@ -97,39 +99,39 @@ export class DefaultApi extends BaseAPI {
     /**
      * Create a subfolder inside a user\'s folder
      */
-    createSubfolderIdSubfolderNamePost({ id, subfolderName, createSubfolderIdSubfolderNamePostRequest }: CreateSubfolderIdSubfolderNamePostRequest): Observable<void>
-    createSubfolderIdSubfolderNamePost({ id, subfolderName, createSubfolderIdSubfolderNamePostRequest }: CreateSubfolderIdSubfolderNamePostRequest, opts?: OperationOpts): Observable<void | AjaxResponse<void>>
-    createSubfolderIdSubfolderNamePost({ id, subfolderName, createSubfolderIdSubfolderNamePostRequest }: CreateSubfolderIdSubfolderNamePostRequest, opts?: OperationOpts): Observable<void | AjaxResponse<void>> {
-        throwIfNullOrUndefined(id, 'id', 'createSubfolderIdSubfolderNamePost');
-        throwIfNullOrUndefined(subfolderName, 'subfolderName', 'createSubfolderIdSubfolderNamePost');
-        throwIfNullOrUndefined(createSubfolderIdSubfolderNamePostRequest, 'createSubfolderIdSubfolderNamePostRequest', 'createSubfolderIdSubfolderNamePost');
+    createSubfolderIdWildcardPathPost({ id, wildcardPath, createSubfolderRequest }: CreateSubfolderIdWildcardPathPostRequest): Observable<void>
+    createSubfolderIdWildcardPathPost({ id, wildcardPath, createSubfolderRequest }: CreateSubfolderIdWildcardPathPostRequest, opts?: OperationOpts): Observable<void | AjaxResponse<void>>
+    createSubfolderIdWildcardPathPost({ id, wildcardPath, createSubfolderRequest }: CreateSubfolderIdWildcardPathPostRequest, opts?: OperationOpts): Observable<void | AjaxResponse<void>> {
+        throwIfNullOrUndefined(id, 'id', 'createSubfolderIdWildcardPathPost');
+        throwIfNullOrUndefined(wildcardPath, 'wildcardPath', 'createSubfolderIdWildcardPathPost');
+        throwIfNullOrUndefined(createSubfolderRequest, 'createSubfolderRequest', 'createSubfolderIdWildcardPathPost');
 
         const headers: HttpHeaders = {
             'Content-Type': 'application/json',
         };
 
         return this.request<void>({
-            url: '/create-subfolder/{id}/{subfolderName}'.replace('{id}', encodeURI(id)).replace('{subfolderName}', encodeURI(subfolderName)),
+            url: '/create-subfolder/{id}/{wildcardPath}'.replace('{id}', encodeURI(id)).replace('{wildcardPath}', encodeURI(wildcardPath)),
             method: 'POST',
             headers,
-            body: createSubfolderIdSubfolderNamePostRequest,
+            body: createSubfolderRequest,
         }, opts?.responseOpts);
     };
 
     /**
      * Delete a file from a user\'s folder
      */
-    deleteFileIdFileNameDelete({ id, fileName }: DeleteFileIdFileNameDeleteRequest): Observable<void>
-    deleteFileIdFileNameDelete({ id, fileName }: DeleteFileIdFileNameDeleteRequest, opts?: OperationOpts): Observable<void | AjaxResponse<void>>
-    deleteFileIdFileNameDelete({ id, fileName }: DeleteFileIdFileNameDeleteRequest, opts?: OperationOpts): Observable<void | AjaxResponse<void>> {
-        throwIfNullOrUndefined(id, 'id', 'deleteFileIdFileNameDelete');
-        throwIfNullOrUndefined(fileName, 'fileName', 'deleteFileIdFileNameDelete');
+    deleteFileIdWildcardPathDelete({ id, wildcardPath }: DeleteFileIdWildcardPathDeleteRequest): Observable<void>
+    deleteFileIdWildcardPathDelete({ id, wildcardPath }: DeleteFileIdWildcardPathDeleteRequest, opts?: OperationOpts): Observable<void | AjaxResponse<void>>
+    deleteFileIdWildcardPathDelete({ id, wildcardPath }: DeleteFileIdWildcardPathDeleteRequest, opts?: OperationOpts): Observable<void | AjaxResponse<void>> {
+        throwIfNullOrUndefined(id, 'id', 'deleteFileIdWildcardPathDelete');
+        throwIfNullOrUndefined(wildcardPath, 'wildcardPath', 'deleteFileIdWildcardPathDelete');
 
         const headers: HttpHeaders = {
         };
 
         return this.request<void>({
-            url: '/delete-file/{id}/{fileName}'.replace('{id}', encodeURI(id)).replace('{fileName}', encodeURI(fileName)),
+            url: '/delete-file/{id}/{wildcardPath}'.replace('{id}', encodeURI(id)).replace('{wildcardPath}', encodeURI(wildcardPath)),
             method: 'DELETE',
             headers,
         }, opts?.responseOpts);
@@ -138,17 +140,17 @@ export class DefaultApi extends BaseAPI {
     /**
      * Delete a folder (user or admin)
      */
-    deleteFolderIdFolderNameDelete({ id, folderName }: DeleteFolderIdFolderNameDeleteRequest): Observable<void>
-    deleteFolderIdFolderNameDelete({ id, folderName }: DeleteFolderIdFolderNameDeleteRequest, opts?: OperationOpts): Observable<void | AjaxResponse<void>>
-    deleteFolderIdFolderNameDelete({ id, folderName }: DeleteFolderIdFolderNameDeleteRequest, opts?: OperationOpts): Observable<void | AjaxResponse<void>> {
-        throwIfNullOrUndefined(id, 'id', 'deleteFolderIdFolderNameDelete');
-        throwIfNullOrUndefined(folderName, 'folderName', 'deleteFolderIdFolderNameDelete');
+    deleteFolderIdWildcardPathDelete({ id, wildcardPath }: DeleteFolderIdWildcardPathDeleteRequest): Observable<void>
+    deleteFolderIdWildcardPathDelete({ id, wildcardPath }: DeleteFolderIdWildcardPathDeleteRequest, opts?: OperationOpts): Observable<void | AjaxResponse<void>>
+    deleteFolderIdWildcardPathDelete({ id, wildcardPath }: DeleteFolderIdWildcardPathDeleteRequest, opts?: OperationOpts): Observable<void | AjaxResponse<void>> {
+        throwIfNullOrUndefined(id, 'id', 'deleteFolderIdWildcardPathDelete');
+        throwIfNullOrUndefined(wildcardPath, 'wildcardPath', 'deleteFolderIdWildcardPathDelete');
 
         const headers: HttpHeaders = {
         };
 
         return this.request<void>({
-            url: '/delete-folder/{id}/{folderName}'.replace('{id}', encodeURI(id)).replace('{folderName}', encodeURI(folderName)),
+            url: '/delete-folder/{id}/{wildcardPath}'.replace('{id}', encodeURI(id)).replace('{wildcardPath}', encodeURI(wildcardPath)),
             method: 'DELETE',
             headers,
         }, opts?.responseOpts);
@@ -157,36 +159,37 @@ export class DefaultApi extends BaseAPI {
     /**
      * Download and decompress a file from a user\'s folder
      */
-    downloadIdFileNameGet({ id, fileName }: DownloadIdFileNameGetRequest): Observable<void>
-    downloadIdFileNameGet({ id, fileName }: DownloadIdFileNameGetRequest, opts?: OperationOpts): Observable<void | AjaxResponse<void>>
-    downloadIdFileNameGet({ id, fileName }: DownloadIdFileNameGetRequest, opts?: OperationOpts): Observable<void | AjaxResponse<void>> {
-        throwIfNullOrUndefined(id, 'id', 'downloadIdFileNameGet');
-        throwIfNullOrUndefined(fileName, 'fileName', 'downloadIdFileNameGet');
+    downloadIdWildcardPathGet({ id, wildcardPath }: DownloadIdWildcardPathGetRequest): Observable<Blob>
+    downloadIdWildcardPathGet({ id, wildcardPath }: DownloadIdWildcardPathGetRequest, opts?: OperationOpts): Observable<AjaxResponse<Blob>>
+    downloadIdWildcardPathGet({ id, wildcardPath }: DownloadIdWildcardPathGetRequest, opts?: OperationOpts): Observable<Blob | AjaxResponse<Blob>> {
+        throwIfNullOrUndefined(id, 'id', 'downloadIdWildcardPathGet');
+        throwIfNullOrUndefined(wildcardPath, 'wildcardPath', 'downloadIdWildcardPathGet');
 
         const headers: HttpHeaders = {
         };
 
-        return this.request<void>({
-            url: '/download/{id}/{fileName}'.replace('{id}', encodeURI(id)).replace('{fileName}', encodeURI(fileName)),
+        return this.request<Blob>({
+            url: '/download/{id}/{wildcardPath}'.replace('{id}', encodeURI(id)).replace('{wildcardPath}', encodeURI(wildcardPath)),
             method: 'GET',
             headers,
+            responseType: 'blob',
         }, opts?.responseOpts);
     };
 
     /**
      * List files in a user\'s folder
      */
-    listIdFolderNameGet({ id, folderName }: ListIdFolderNameGetRequest): Observable<void>
-    listIdFolderNameGet({ id, folderName }: ListIdFolderNameGetRequest, opts?: OperationOpts): Observable<void | AjaxResponse<void>>
-    listIdFolderNameGet({ id, folderName }: ListIdFolderNameGetRequest, opts?: OperationOpts): Observable<void | AjaxResponse<void>> {
-        throwIfNullOrUndefined(id, 'id', 'listIdFolderNameGet');
-        throwIfNullOrUndefined(folderName, 'folderName', 'listIdFolderNameGet');
+    listIdWildcardPathGet({ id, wildcardPath }: ListIdWildcardPathGetRequest): Observable<ListIdWildcardPathGet200Response>
+    listIdWildcardPathGet({ id, wildcardPath }: ListIdWildcardPathGetRequest, opts?: OperationOpts): Observable<AjaxResponse<ListIdWildcardPathGet200Response>>
+    listIdWildcardPathGet({ id, wildcardPath }: ListIdWildcardPathGetRequest, opts?: OperationOpts): Observable<ListIdWildcardPathGet200Response | AjaxResponse<ListIdWildcardPathGet200Response>> {
+        throwIfNullOrUndefined(id, 'id', 'listIdWildcardPathGet');
+        throwIfNullOrUndefined(wildcardPath, 'wildcardPath', 'listIdWildcardPathGet');
 
         const headers: HttpHeaders = {
         };
 
-        return this.request<void>({
-            url: '/list/{id}/{folderName}'.replace('{id}', encodeURI(id)).replace('{folderName}', encodeURI(folderName)),
+        return this.request<ListIdWildcardPathGet200Response>({
+            url: '/list/{id}/{wildcardPath}'.replace('{id}', encodeURI(id)).replace('{wildcardPath}', encodeURI(wildcardPath)),
             method: 'GET',
             headers,
         }, opts?.responseOpts);
@@ -195,30 +198,30 @@ export class DefaultApi extends BaseAPI {
     /**
      * Login to obtain a JWT token
      */
-    loginPost({ registerPostRequest }: LoginPostRequest): Observable<LoginPost200Response>
-    loginPost({ registerPostRequest }: LoginPostRequest, opts?: OperationOpts): Observable<AjaxResponse<LoginPost200Response>>
-    loginPost({ registerPostRequest }: LoginPostRequest, opts?: OperationOpts): Observable<LoginPost200Response | AjaxResponse<LoginPost200Response>> {
-        throwIfNullOrUndefined(registerPostRequest, 'registerPostRequest', 'loginPost');
+    loginPost({ loginRequest }: LoginPostRequest): Observable<LoginResponse>
+    loginPost({ loginRequest }: LoginPostRequest, opts?: OperationOpts): Observable<AjaxResponse<LoginResponse>>
+    loginPost({ loginRequest }: LoginPostRequest, opts?: OperationOpts): Observable<LoginResponse | AjaxResponse<LoginResponse>> {
+        throwIfNullOrUndefined(loginRequest, 'loginRequest', 'loginPost');
 
         const headers: HttpHeaders = {
             'Content-Type': 'application/json',
         };
 
-        return this.request<LoginPost200Response>({
+        return this.request<LoginResponse>({
             url: '/login',
             method: 'POST',
             headers,
-            body: registerPostRequest,
+            body: loginRequest,
         }, opts?.responseOpts);
     };
 
     /**
      * Register a new user
      */
-    registerPost({ registerPostRequest }: RegisterPostRequest): Observable<void>
-    registerPost({ registerPostRequest }: RegisterPostRequest, opts?: OperationOpts): Observable<void | AjaxResponse<void>>
-    registerPost({ registerPostRequest }: RegisterPostRequest, opts?: OperationOpts): Observable<void | AjaxResponse<void>> {
-        throwIfNullOrUndefined(registerPostRequest, 'registerPostRequest', 'registerPost');
+    registerPost({ registerRequest }: RegisterPostRequest): Observable<void>
+    registerPost({ registerRequest }: RegisterPostRequest, opts?: OperationOpts): Observable<void | AjaxResponse<void>>
+    registerPost({ registerRequest }: RegisterPostRequest, opts?: OperationOpts): Observable<void | AjaxResponse<void>> {
+        throwIfNullOrUndefined(registerRequest, 'registerRequest', 'registerPost');
 
         const headers: HttpHeaders = {
             'Content-Type': 'application/json',
@@ -228,7 +231,7 @@ export class DefaultApi extends BaseAPI {
             url: '/register',
             method: 'POST',
             headers,
-            body: registerPostRequest,
+            body: registerRequest,
         }, opts?.responseOpts);
     };
 

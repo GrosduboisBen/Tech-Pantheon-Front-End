@@ -2,7 +2,7 @@ openapi: 3.0.1
 info:
   title: Secure CDN API
   version: 1.0.0
-  description: API pour la gestion d'un CDN sécurisé avec authentification JWT
+  description: API for managing a secure CDN with JWT authentication
 
 servers:
   - url: http://localhost:3000
@@ -16,13 +16,7 @@ paths:
         content:
           application/json:
             schema:
-              type: object
-              required: [userId, password]
-              properties:
-                userId:
-                  type: string
-                password:
-                  type: string
+              $ref: '#/components/schemas/RegisterRequest'
       responses:
         '200':
           description: User registered and folders created
@@ -39,29 +33,20 @@ paths:
         content:
           application/json:
             schema:
-              type: object
-              required: [userId, password]
-              properties:
-                userId:
-                  type: string
-                password:
-                  type: string
+              $ref: '#/components/schemas/LoginRequest'
       responses:
         '200':
           description: Login successful
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  token:
-                    type: string
+                $ref: '#/components/schemas/LoginResponse'
         '400':
           description: Missing userId or password
         '401':
           description: Invalid credentials
 
-  /create-subfolder/{id}/{subfolderName}:
+  /create-subfolder/{id}/{wildcardPath}:
     post:
       summary: Create a subfolder inside a user's folder
       parameters:
@@ -71,20 +56,17 @@ paths:
           schema:
             type: string
         - in: path
-          name: subfolderName
+          name: wildcardPath
           required: true
           schema:
             type: string
+          description: Catch-all parameter for nested paths
       requestBody:
         required: true
         content:
           application/json:
             schema:
-              type: object
-              required: [subFolderName]
-              properties:
-                subFolderName:
-                  type: string
+              $ref: '#/components/schemas/CreateSubfolderRequest'
       security:
         - bearerAuth: []
       responses:
@@ -99,7 +81,7 @@ paths:
         '500':
           description: Internal server error
 
-  /add/{id}/{fileName}:
+  /add/{id}/{wildcardPath}:
     post:
       summary: Upload and compress a file into a user's folder
       parameters:
@@ -109,10 +91,11 @@ paths:
           schema:
             type: string
         - in: path
-          name: fileName
+          name: wildcardPath
           required: true
           schema:
             type: string
+          description: Catch-all parameter for nested paths
       requestBody:
         required: true
         content:
@@ -166,7 +149,7 @@ paths:
         '404':
           description: Folder not found
 
-  /list/{id}/{folderName}:
+  /list/{id}/{wildcardPath}:
     get:
       summary: List files in a user's folder
       parameters:
@@ -176,21 +159,31 @@ paths:
           schema:
             type: string
         - in: path
-          name: folderName
+          name: wildcardPath
           required: true
           schema:
             type: string
+          description: Catch-all parameter for nested paths
       security:
         - bearerAuth: []
       responses:
         '200':
           description: List of files in the folder
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  files:
+                    type: array
+                    items:
+                      type: string
         '403':
           description: Unauthorized to list folder
         '404':
           description: Folder not found
 
-  /download/{id}/{fileName}:
+  /download/{id}/{wildcardPath}:
     get:
       summary: Download and decompress a file from a user's folder
       parameters:
@@ -200,21 +193,27 @@ paths:
           schema:
             type: string
         - in: path
-          name: fileName
+          name: wildcardPath
           required: true
           schema:
             type: string
+          description: Catch-all parameter for nested paths
       security:
         - bearerAuth: []
       responses:
         '200':
           description: File downloaded
+          content:
+            application/octet-stream:
+              schema:
+                type: string
+                format: binary
         '403':
           description: Unauthorized to download file
         '404':
           description: File not found
 
-  /delete-folder/{id}/{folderName}:
+  /delete-folder/{id}/{wildcardPath}:
     delete:
       summary: Delete a folder (user or admin)
       parameters:
@@ -224,10 +223,11 @@ paths:
           schema:
             type: string
         - in: path
-          name: folderName
+          name: wildcardPath
           required: true
           schema:
             type: string
+          description: Catch-all parameter for nested paths
       security:
         - bearerAuth: []
       responses:
@@ -240,7 +240,7 @@ paths:
         '500':
           description: Failed to delete folder
 
-  /delete-file/{id}/{fileName}:
+  /delete-file/{id}/{wildcardPath}:
     delete:
       summary: Delete a file from a user's folder
       parameters:
@@ -250,10 +250,11 @@ paths:
           schema:
             type: string
         - in: path
-          name: fileName
+          name: wildcardPath
           required: true
           schema:
             type: string
+          description: Catch-all parameter for nested paths
       security:
         - bearerAuth: []
       responses:
@@ -272,3 +273,40 @@ components:
       type: http
       scheme: bearer
       bearerFormat: JWT
+
+  schemas:
+    RegisterRequest:
+      type: object
+      required:
+        - userId
+        - password
+      properties:
+        userId:
+          type: string
+        password:
+          type: string
+
+    LoginRequest:
+      type: object
+      required:
+        - userId
+        - password
+      properties:
+        userId:
+          type: string
+        password:
+          type: string
+
+    LoginResponse:
+      type: object
+      properties:
+        token:
+          type: string
+
+    CreateSubfolderRequest:
+      type: object
+      required:
+        - subFolderName
+      properties:
+        subFolderName:
+          type: string

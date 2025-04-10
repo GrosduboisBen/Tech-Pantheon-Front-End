@@ -13,12 +13,12 @@
 
 /**
  * @export
- * @interface LoginPost200Response
+ * @interface ListIdWildcardPathGet200Response
  */
-export interface LoginPost200Response {
+export interface ListIdWildcardPathGet200Response {
     /**
-     * @type {string}
-     * @memberof LoginPost200Response
+     * @type {Array<string>}
+     * @memberof ListIdWildcardPathGet200Response
      */
-    token?: string;
+    files?: Array<string>;
 }

@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { loadUserById } from 'src/services/states/users/users.actions';
-import { selectCurrentUser } from 'src/services/states/users/users.selectors';
+import { login } from '../services/states/cdn-services/cdn-services.actions';
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -13,6 +14,9 @@ export class AppComponent {
     this.store.dispatch(
       //TODO: Trigger on auth when implemented ( no straight ids )
       loadUserById({ userId: '99aa0321-07d1-49ec-bad3-3fb633cd2729' })
+    );
+    this.store.dispatch(
+      login({ userId: 'testuser', password: 'testpassword' })
     );
   }
 }

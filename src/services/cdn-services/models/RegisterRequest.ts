@@ -1,7 +1,7 @@
 // tslint:disable
 /**
  * Secure CDN API
- * API pour la gestion d\'un CDN sécurisé avec authentification JWT
+ * API for managing a secure CDN with JWT authentication
  *
  * The version of the OpenAPI document: 1.0.0
  * 
@@ -13,12 +13,17 @@
 
 /**
  * @export
- * @interface CreateSubfolderIdPostRequest
+ * @interface RegisterRequest
  */
-export interface CreateSubfolderIdPostRequest {
+export interface RegisterRequest {
     /**
      * @type {string}
-     * @memberof CreateSubfolderIdPostRequest
+     * @memberof RegisterRequest
      */
-    subFolderName: string;
+    userId: string;
+    /**
+     * @type {string}
+     * @memberof RegisterRequest
+     */
+    password: string;
 }

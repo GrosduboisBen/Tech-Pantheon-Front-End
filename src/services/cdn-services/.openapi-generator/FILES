@@ -2,9 +2,11 @@
 apis/DefaultApi.ts
 apis/index.ts
 index.ts
-models/CreateSubfolderIdSubfolderNamePostRequest.ts
-models/LoginPost200Response.ts
-models/RegisterPostRequest.ts
+models/CreateSubfolderRequest.ts
+models/ListIdWildcardPathGet200Response.ts
+models/LoginRequest.ts
+models/LoginResponse.ts
+models/RegisterRequest.ts
 models/index.ts
 runtime.ts
 servers.ts

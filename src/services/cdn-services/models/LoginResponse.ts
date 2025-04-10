@@ -13,12 +13,12 @@
 
 /**
  * @export
- * @interface LoginPost200Response
+ * @interface LoginResponse
  */
-export interface LoginPost200Response {
+export interface LoginResponse {
     /**
      * @type {string}
-     * @memberof LoginPost200Response
+     * @memberof LoginResponse
      */
     token?: string;
 }

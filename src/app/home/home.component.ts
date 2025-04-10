@@ -44,6 +44,7 @@ export class HomeComponent implements OnInit {
   userPricing$: Observable<PricingState | undefined> =
     new Observable<PricingState>();
 
+
   constructor(private store: Store) {
     this.currentUser$ = this.store.select(selectCurrentUser);
     this.userProjects$ = this.store.select(selectProjects);

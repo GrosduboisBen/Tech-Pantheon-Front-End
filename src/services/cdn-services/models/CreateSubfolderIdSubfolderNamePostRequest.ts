@@ -20,5 +20,5 @@ export interface CreateSubfolderIdSubfolderNamePostRequest {
      * @type {string}
      * @memberof CreateSubfolderIdSubfolderNamePostRequest
      */
-    subFolderName: string;
+    subFolderName?: string;
 }
