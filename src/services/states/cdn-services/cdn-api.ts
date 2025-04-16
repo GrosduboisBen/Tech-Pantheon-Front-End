@@ -16,7 +16,6 @@ export class CdnApiService {
                   Authorization: `Bearer ${token}`,
                 };
               }
-              console.log(context)
               return context;
             },
           },
