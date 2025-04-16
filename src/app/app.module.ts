@@ -54,6 +54,15 @@ import { TagModule } from 'primeng/tag';
 import { RatingModule } from 'primeng/rating';
 import { pricingReducer } from 'src/services/states/pricings/pricings.reducers';
 import { PricingEffects } from 'src/services/states/pricings/pricings.effects';
+import { DefaultApi } from '../services/cdn-services/apis/DefaultApi';
+import {
+  cdnAuthReducer,
+  cdnFilesReducer,
+} from '../services/states/cdn-services/cdn-services.reducers';
+import {
+  CdnAuthEffects,
+  CdnFilesEffects,
+} from '../services/states/cdn-services/cdn-services.effects';
 
 registerLocaleData(en);
 
@@ -92,6 +101,8 @@ registerLocaleData(en);
       projects: projectReducer,
       feedbacks: feedbackReducer,
       pricings: pricingReducer,
+      auth: cdnAuthReducer, // Authentication reducer
+      files: cdnFilesReducer, // File management reducer
     }),
     EffectsModule.forRoot([
       UserEffects,
@@ -99,6 +110,8 @@ registerLocaleData(en);
       ProjectEffects,
       FeedbacksEffects,
       PricingEffects,
+      CdnAuthEffects, // Authentication effects
+      CdnFilesEffects, // File management effects
     ]),
     StoreDevtoolsModule.instrument({ maxAge: 25 }),
   ],
@@ -107,6 +120,7 @@ registerLocaleData(en);
     ProjectsApi,
     FeedBacksApi,
     PricingApi,
+    DefaultApi, // Add DefaultApi to providers
     provideAnimationsAsync(),
     providePrimeNG({
       theme: {

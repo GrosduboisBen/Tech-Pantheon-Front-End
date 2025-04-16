@@ -4,7 +4,7 @@
             *ngIf="currentUser$ | async as user;"
             nzTitle={{userMainJob}}
             nz-col
-            [nzSpan]="16">
+            [nzSpan]="18">
             <div nz-row class="row-container">
                 <img
                     nz-image
@@ -28,12 +28,12 @@
             [thumbClass]="'scrollbar'"
             externalViewport
             nz-col
-            nzSpan="6"
+            nzSpan="4"
             class="compact-card">
             <nz-card 
                 *ngIf="userPricing$ | async as pricings"
                 scrollViewport
-                class="compact-card pricing-card"
+                class="compact-card pricing-card pale-card"
                 nzHoverable
                 nz-col
                 nzSpan="11"
