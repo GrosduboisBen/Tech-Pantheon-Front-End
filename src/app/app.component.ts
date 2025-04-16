@@ -22,7 +22,7 @@ export class AppComponent {
     this.store.dispatch(
       login({ userId: 'testuser', password: 'testpassword' })
     );
-    this.store.dispatch(loadFiles({ userId: 'testuser', folderPath: '' }));
-    this.store.dispatch(previewFile({ id: 'testuser', path: 'PPBen.jpeg' }));
+    this.store.dispatch(loadFiles({ userId: 'testuser', folderPath: '' })); // TODO Replace in component
+    // this.store.dispatch(previewFile({ id: 'testuser', path: 'CV Benoit.pdf' })); // TODO Replace in component
   }
 }
