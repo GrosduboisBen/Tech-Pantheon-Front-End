@@ -197,4 +197,23 @@ export class CdnFilesEffects {
       )
     )
   );
+
+  previewFile$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(CdnServicesActions.previewFile),
+      mergeMap(({ id, path }) =>
+        this.cdnApiService
+          .getApi()
+          .previewIdWildcardPathGet({ id, wildcardPath: path })
+          .pipe(
+            map(blob =>
+              CdnServicesActions.previewFileSuccess({ id, path, blob })
+            ),
+            catchError(error =>
+              of(CdnServicesActions.previewFileFailure({ id, path, error }))
+            )
+          )
+      )
+    )
+  );
 }

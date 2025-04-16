@@ -14,6 +14,10 @@ export const initialAuthState: CdnAuthState = {
   registerError: null,
 };
 
+function makePreviewKey(id: string, path: string): string {
+  return `${id}::${path}`;
+}
+
 export const cdnAuthReducer = createReducer(
   initialAuthState,
   on(CdnServicesActions.login, state => ({ ...state, loginError: null })),
@@ -38,12 +42,18 @@ export interface CdnFilesState {
   files: any[];
   loading: boolean;
   error: string | null;
+  previewBlobs: Record<string, Blob>;
+  previewLoading: Record<string, boolean>;
+  previewErrors: Record<string, any>;
 }
 
 export const initialFilesState: CdnFilesState = {
   files: [],
   loading: false,
   error: null,
+  previewBlobs: {},
+  previewLoading: {},
+  previewErrors: {},
 };
 
 export const cdnFilesReducer = createReducer(
@@ -136,5 +146,31 @@ export const cdnFilesReducer = createReducer(
     ...state,
     error,
     loading: false,
-  }))
+  })),
+  on(CdnServicesActions.previewFile, (state, { id, path }) => {
+    const key = makePreviewKey(id, path);
+    return {
+      ...state,
+      previewLoading: { ...state.previewLoading, [key]: true },
+      previewErrors: { ...state.previewErrors, [key]: null },
+    };
+  }),
+
+  on(CdnServicesActions.previewFileSuccess, (state, { id, path, blob }) => {
+    const key = makePreviewKey(id, path);
+    return {
+      ...state,
+      previewLoading: { ...state.previewLoading, [key]: false },
+      previewBlobs: { ...state.previewBlobs, [key]: blob },
+    };
+  }),
+
+  on(CdnServicesActions.previewFileFailure, (state, { id, path, error }) => {
+    const key = makePreviewKey(id, path);
+    return {
+      ...state,
+      previewLoading: { ...state.previewLoading, [key]: false },
+      previewErrors: { ...state.previewErrors, [key]: error },
+    };
+  })
 );

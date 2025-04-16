@@ -59,6 +59,11 @@ export interface LoginPostRequest {
     loginRequest: LoginRequest;
 }
 
+export interface PreviewIdWildcardPathGetRequest {
+    id: string;
+    wildcardPath: string;
+}
+
 export interface RegisterPostRequest {
     registerRequest: RegisterRequest;
 }
@@ -212,6 +217,26 @@ export class DefaultApi extends BaseAPI {
             method: 'POST',
             headers,
             body: loginRequest,
+        }, opts?.responseOpts);
+    };
+
+    /**
+     * Preview a file from a user\'s folder
+     */
+    previewIdWildcardPathGet({ id, wildcardPath }: PreviewIdWildcardPathGetRequest): Observable<Blob>
+    previewIdWildcardPathGet({ id, wildcardPath }: PreviewIdWildcardPathGetRequest, opts?: OperationOpts): Observable<AjaxResponse<Blob>>
+    previewIdWildcardPathGet({ id, wildcardPath }: PreviewIdWildcardPathGetRequest, opts?: OperationOpts): Observable<Blob | AjaxResponse<Blob>> {
+        throwIfNullOrUndefined(id, 'id', 'previewIdWildcardPathGet');
+        throwIfNullOrUndefined(wildcardPath, 'wildcardPath', 'previewIdWildcardPathGet');
+
+        const headers: HttpHeaders = {
+        };
+
+        return this.request<Blob>({
+            url: '/preview/{id}/{wildcardPath}'.replace('{id}', encodeURI(id)).replace('{wildcardPath}', encodeURI(wildcardPath)),
+            method: 'GET',
+            headers,
+            responseType: 'blob',
         }, opts?.responseOpts);
     };
 

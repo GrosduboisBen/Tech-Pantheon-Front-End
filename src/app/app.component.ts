@@ -4,6 +4,7 @@ import { loadUserById } from 'src/services/states/users/users.actions';
 import {
   loadFiles,
   login,
+  previewFile,
 } from '../services/states/cdn-services/cdn-services.actions';
 
 @Component({
@@ -22,5 +23,6 @@ export class AppComponent {
       login({ userId: 'testuser', password: 'testpassword' })
     );
     this.store.dispatch(loadFiles({ userId: 'testuser', folderPath: '' }));
+    this.store.dispatch(previewFile({ id: 'testuser', path: 'PPBen.jpeg' }));
   }
 }

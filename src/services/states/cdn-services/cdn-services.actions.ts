@@ -90,6 +90,21 @@ export const downloadFileFailure = createAction(
   props<{ error: string }>()
 );
 
+export const previewFile = createAction(
+  '[CDN] Preview File',
+  props<{ id: string; path: string }>()
+);
+
+export const previewFileSuccess = createAction(
+  '[CDN] Preview File Success',
+  props<{ id: string; path: string; blob: Blob }>()
+);
+
+export const previewFileFailure = createAction(
+  '[CDN] Preview File Failure',
+  props<{ id: string; path: string; error: any }>()
+);
+
 // Authentication Actions
 export const login = createAction(
   '[CDN Auth] Login',
