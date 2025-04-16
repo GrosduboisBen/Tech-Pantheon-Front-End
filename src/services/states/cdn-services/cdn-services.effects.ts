@@ -1,27 +1,32 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import * as CdnServicesActions from './cdn-services.actions';
-import { DefaultApi } from '../../cdn-services/apis/DefaultApi';
 import { catchError, map, mergeMap } from 'rxjs/operators';
 import { of } from 'rxjs';
+import { CdnApiService } from './cdn-api';
 
 @Injectable()
 export class CdnAuthEffects {
   constructor(
     private actions$: Actions,
-    private defaultApi: DefaultApi
+    private cdnApiService: CdnApiService
   ) {}
 
   login$ = createEffect(() =>
     this.actions$.pipe(
       ofType(CdnServicesActions.login),
       mergeMap(({ userId, password }) =>
-        this.defaultApi
+        this.cdnApiService
+          .getApi()
           .loginPost({ loginRequest: { userId, password } }) // Wrap userId and password in loginRequest
           .pipe(
-            map(response =>
-              CdnServicesActions.loginSuccess({ token: response.token })
-            ),
+            map(response => {
+              const token = response.token;
+              if (token) {
+                localStorage.setItem('cdn_token', token);
+              }
+              return CdnServicesActions.loginSuccess({ token: token });
+            }),
             catchError(error =>
               of(CdnServicesActions.loginFailure({ error: error.message }))
             )
@@ -34,7 +39,8 @@ export class CdnAuthEffects {
     this.actions$.pipe(
       ofType(CdnServicesActions.register),
       mergeMap(({ userId, password }) =>
-        this.defaultApi
+        this.cdnApiService
+          .getApi()
           .registerPost({ registerRequest: { userId, password } }) // Wrap userId and password in registerRequest
           .pipe(
             map(() => CdnServicesActions.registerSuccess()),
@@ -51,14 +57,15 @@ export class CdnAuthEffects {
 export class CdnFilesEffects {
   constructor(
     private actions$: Actions,
-    private defaultApi: DefaultApi
+    private cdnApiService: CdnApiService
   ) {}
 
   loadFiles$ = createEffect(() =>
     this.actions$.pipe(
       ofType(CdnServicesActions.loadFiles),
       mergeMap(({ userId, folderPath }) =>
-        this.defaultApi
+        this.cdnApiService
+          .getApi()
           .listIdWildcardPathGet({ id: userId, wildcardPath: folderPath })
           .pipe(
             map(files => CdnServicesActions.loadFilesSuccess({ files })),
@@ -78,7 +85,8 @@ export class CdnFilesEffects {
     this.actions$.pipe(
       ofType(CdnServicesActions.uploadFile),
       mergeMap(({ userId, folderPath, file }) =>
-        this.defaultApi
+        this.cdnApiService
+          .getApi()
           .addIdWildcardPathPost({ id: userId, wildcardPath: folderPath, file })
           .pipe(
             map(file => CdnServicesActions.uploadFileSuccess({ file })),
@@ -98,7 +106,8 @@ export class CdnFilesEffects {
     this.actions$.pipe(
       ofType(CdnServicesActions.createFolder),
       mergeMap(({ userId, folderName }) =>
-        this.defaultApi
+        this.cdnApiService
+          .getApi()
           .createSubfolderIdWildcardPathPost({
             id: userId,
             wildcardPath: folderName,
@@ -124,7 +133,8 @@ export class CdnFilesEffects {
     this.actions$.pipe(
       ofType(CdnServicesActions.deleteFile),
       mergeMap(({ userId, fileName }) =>
-        this.defaultApi
+        this.cdnApiService
+          .getApi()
           .deleteFileIdWildcardPathDelete({
             id: userId,
             wildcardPath: fileName,
@@ -147,7 +157,8 @@ export class CdnFilesEffects {
     this.actions$.pipe(
       ofType(CdnServicesActions.deleteFolder),
       mergeMap(({ userId, folderName }) =>
-        this.defaultApi
+        this.cdnApiService
+          .getApi()
           .deleteFolderIdWildcardPathDelete({
             id: userId,
             wildcardPath: folderName,
@@ -170,7 +181,8 @@ export class CdnFilesEffects {
     this.actions$.pipe(
       ofType(CdnServicesActions.downloadFile),
       mergeMap(({ userId, fileName }) =>
-        this.defaultApi
+        this.cdnApiService
+          .getApi()
           .downloadIdWildcardPathGet({ id: userId, wildcardPath: fileName })
           .pipe(
             map(file => CdnServicesActions.downloadFileSuccess({ file })),

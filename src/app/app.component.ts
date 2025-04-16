@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { loadUserById } from 'src/services/states/users/users.actions';
-import { login } from '../services/states/cdn-services/cdn-services.actions';
+import {
+  loadFiles,
+  login,
+} from '../services/states/cdn-services/cdn-services.actions';
 
 @Component({
   selector: 'app-root',
@@ -18,5 +21,6 @@ export class AppComponent {
     this.store.dispatch(
       login({ userId: 'testuser', password: 'testpassword' })
     );
+    this.store.dispatch(loadFiles({ userId: 'testuser', folderPath: '' }));
   }
 }
