@@ -139,7 +139,6 @@
         nz-col
         nzSpan="22"
         nzTitle="Resume">
-
         <nz-card *ngIf="previewLoading$ | async">
             <p>Chargement de la preview...</p>
         </nz-card>
@@ -147,59 +146,57 @@
         <nz-card *ngIf="previewError$ | async as error">
             <p>Erreur de preview : {{ error?.message || error }}</p>
         </nz-card>
+        <!-- Remplace ce bloc dans ton HTML à la place de "WIP (CDN for preview)" -->
+        <nz-card *ngIf="(previewUrl$ | async) as previewUrl; else loadingOrErrorCard" nzTitle="Preview">
+          <ng-container *ngIf="(previewMime$ | async) as mimeType">
+            <ng-container [ngSwitch]="true">
 
-<!-- Remplace ce bloc dans ton HTML à la place de "WIP (CDN for preview)" -->
-<nz-card *ngIf="(previewUrl$ | async) as previewUrl; else loadingOrErrorCard" nzTitle="Preview">
-  <ng-container *ngIf="(previewMime$ | async) as mimeType">
-    <ng-container [ngSwitch]="true">
+              <!-- Affichage d'une image -->
+              <ng-container *ngSwitchCase="mimeType.startsWith('image/')">
+                <img
+                  nz-image
+                  nzDisablePreview
+                  width="100%"
+                  [nzSrc]="`${previewUrl}`"
+                  alt="Preview Image"
+                />
+              </ng-container>
 
-      <!-- Affichage d'une image -->
-      <ng-container *ngSwitchCase="mimeType.startsWith('image/')">
-        <img
-          nz-image
-          nzDisablePreview
-          width="100%"
-          [nzSrc]="`${previewUrl}`"
-          alt="Preview Image"
-        />
-      </ng-container>
+              <!-- Affichage d'un PDF -->
+              <ng-container *ngSwitchCase="mimeType === 'application/pdf'">
+                <iframe
+                  [src]="previewUrl"
+                  width="50%"
+                  height="600px"
+                  style="border: none;"
+                ></iframe>
+              </ng-container>
 
-      <!-- Affichage d'un PDF -->
-      <ng-container *ngSwitchCase="mimeType === 'application/pdf'">
-        <iframe
-          [src]="previewUrl"
-          width="50%"
-          height="600px"
-          style="border: none;"
-        ></iframe>
-      </ng-container>
+              <!-- Type non supporté -->
+              <ng-container *ngSwitchDefault>
+                <p>Type de fichier non supporté pour la prévisualisation : {{ mimeType }}</p>
+              </ng-container>
 
-      <!-- Type non supporté -->
-      <ng-container *ngSwitchDefault>
-        <p>Type de fichier non supporté pour la prévisualisation : {{ mimeType }}</p>
-      </ng-container>
+            </ng-container>
+          </ng-container>
+        </nz-card>
 
-    </ng-container>
-  </ng-container>
-</nz-card>
-
-  <!-- Chargement ou erreur -->
-  <ng-template #loadingOrErrorCard>
-    <nz-card nzTitle="Preview">
-      <ng-container *ngIf="(previewLoading$ | async); else errorTemplate">
-        <nz-spin nzSimple [nzTip]="'Chargement du fichier en cours...'"></nz-spin>
-      </ng-container>
-      <ng-template #errorTemplate>
-        <p *ngIf="(previewError$ | async) as error">
-          <nz-alert [nzType]="'error'" [nzMessage]="'Erreur de chargement : ' + error.message" nzShowIcon />
-        </p>
-      </ng-template>
-    </nz-card>
-  </ng-template>
-
-</nz-card>
+        <!-- Chargement ou erreur -->
+        <ng-template #loadingOrErrorCard>
+          <nz-card nzTitle="Preview">
+            <ng-container *ngIf="(previewLoading$ | async); else errorTemplate">
+              <nz-spin nzSimple [nzTip]="'Chargement du fichier en cours...'"></nz-spin>
+            </ng-container>
+            <ng-template #errorTemplate>
+              <p *ngIf="(previewError$ | async) as error">
+                <nz-alert [nzType]="'error'" [nzMessage]="'Erreur de chargement : ' + error.message" nzShowIcon />
+              </p>
+            </ng-template>
+          </nz-card>
+        </ng-template>
+      </nz-card>
     </div>
-</div>
+  </div>
 
 <ng-template #pictureTemplate>
     <img alt="example" src="assets/techpanth.png" />
