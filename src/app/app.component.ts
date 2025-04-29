@@ -4,6 +4,7 @@ import { loadUserById } from 'src/services/states/users/users.actions';
 import {
   loadFiles,
   login,
+  previewFile,
 } from '../services/states/cdn-services/cdn-services.actions';
 
 @Component({
@@ -21,6 +22,7 @@ export class AppComponent {
     this.store.dispatch(
       login({ userId: 'testuser', password: 'testpassword' })
     );
-    this.store.dispatch(loadFiles({ userId: 'testuser', folderPath: '' }));
+    this.store.dispatch(loadFiles({ userId: 'testuser', folderPath: '' })); // TODO Replace in component
+    // this.store.dispatch(previewFile({ id: 'testuser', path: 'CV Benoit.pdf' })); // TODO Replace in component
   }
 }

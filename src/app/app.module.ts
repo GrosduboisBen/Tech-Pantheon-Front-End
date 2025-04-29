@@ -22,6 +22,8 @@ import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzDrawerModule } from 'ng-zorro-antd/drawer';
 import { SideMenuComponent } from './side-menu/side-menu.component';
 import { NzTabsModule } from 'ng-zorro-antd/tabs';
+import { NzSpinModule } from 'ng-zorro-antd/spin';
+
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
@@ -44,6 +46,8 @@ import { FeedbacksEffects } from 'src/services/states/feedbacks/feedbacks.effect
 import { NzImageModule } from 'ng-zorro-antd/image';
 import { NzGridModule } from 'ng-zorro-antd/grid';
 import { NzCardModule } from 'ng-zorro-antd/card';
+import { NzAlertModule } from 'ng-zorro-antd/alert';
+
 import { NgScrollbarModule } from 'ngx-scrollbar';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { providePrimeNG } from 'primeng/config';
@@ -93,6 +97,8 @@ registerLocaleData(en);
     NzDrawerModule,
     NzTabsModule,
     NzImageModule,
+    NzSpinModule,
+    NzAlertModule,
     NgScrollbarModule,
     StoreModule.forRoot({
       users: userListReducer,

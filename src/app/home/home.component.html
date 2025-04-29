@@ -14,7 +14,7 @@
                     nzSrc="assets/techpanth.png"
                     alt=""
                 />
-                <p 
+                <p
                     nz-col
                     [nzSpan]="20">
                     {{user.description}}
@@ -30,7 +30,7 @@
             nz-col
             nzSpan="4"
             class="compact-card">
-            <nz-card 
+            <nz-card
                 *ngIf="userPricing$ | async as pricings"
                 scrollViewport
                 class="compact-card pricing-card pale-card"
@@ -65,7 +65,7 @@
             nzTitle="Projects">
             <ng-template #extraTemplate>
                 <div class="extra-container">
-                    <p-tag 
+                    <p-tag
                     [value]="`Total : ${projects.projects.length}`"
                     [severity]="'secondary'">
                     </p-tag>
@@ -94,8 +94,8 @@
         </nz-card>
         <!-- USER FEEDBACKS CONTAINER -->
         <nz-card
-            *ngIf="userFeedbacks$ | async as feedbacks" 
-            class="main-card pale-card" 
+            *ngIf="userFeedbacks$ | async as feedbacks"
+            class="main-card pale-card"
             nzHoverable
             nz-col
             nzSpan="11"
@@ -103,11 +103,11 @@
             [nzExtra]="totalFeedBackTemplate">
             <ng-template #totalFeedBackTemplate>
                 <div class="extra-container">
-                    <p-tag 
+                    <p-tag
                     [value]="`Total : ${feedbacks.total}`"
                     [severity]="'secondary'">
                     </p-tag>
-                    <p-tag 
+                    <p-tag
                     [value]="`Average Rating : ${feedbacks.averageRating}`"
                     [severity]="getRating(feedbacks.averageRating)">
                     </p-tag>
@@ -130,19 +130,74 @@
                     </nz-card>
                 </ng-template>
             </p-carousel>
-            
+
         </nz-card>
     </div>
     <div nz-row class="row-container">
-        <nz-card class="main-card pale-card" 
-            nzHoverable
-            nz-col
-            nzSpan="22"
-            nzTitle="Resume">
-            <nz-card>
-                WIP ( CDN for preview )
-            </nz-card>
+      <nz-card class="main-card pale-card"
+        nzHoverable
+        nz-col
+        nzSpan="22"
+        nzTitle="Resume">
+
+        <nz-card *ngIf="previewLoading$ | async">
+            <p>Chargement de la preview...</p>
         </nz-card>
+
+        <nz-card *ngIf="previewError$ | async as error">
+            <p>Erreur de preview : {{ error?.message || error }}</p>
+        </nz-card>
+
+<!-- Remplace ce bloc dans ton HTML à la place de "WIP (CDN for preview)" -->
+<nz-card *ngIf="(previewUrl$ | async) as previewUrl; else loadingOrErrorCard" nzTitle="Preview">
+  <ng-container *ngIf="(previewMime$ | async) as mimeType">
+    <ng-container [ngSwitch]="true">
+
+      <!-- Affichage d'une image -->
+      <ng-container *ngSwitchCase="mimeType.startsWith('image/')">
+        <img
+          nz-image
+          nzDisablePreview
+          width="100%"
+          [nzSrc]="`${previewUrl}`"
+          alt="Preview Image"
+        />
+      </ng-container>
+
+      <!-- Affichage d'un PDF -->
+      <ng-container *ngSwitchCase="mimeType === 'application/pdf'">
+        <iframe
+          [src]="previewUrl"
+          width="50%"
+          height="600px"
+          style="border: none;"
+        ></iframe>
+      </ng-container>
+
+      <!-- Type non supporté -->
+      <ng-container *ngSwitchDefault>
+        <p>Type de fichier non supporté pour la prévisualisation : {{ mimeType }}</p>
+      </ng-container>
+
+    </ng-container>
+  </ng-container>
+</nz-card>
+
+  <!-- Chargement ou erreur -->
+  <ng-template #loadingOrErrorCard>
+    <nz-card nzTitle="Preview">
+      <ng-container *ngIf="(previewLoading$ | async); else errorTemplate">
+        <nz-spin nzSimple [nzTip]="'Chargement du fichier en cours...'"></nz-spin>
+      </ng-container>
+      <ng-template #errorTemplate>
+        <p *ngIf="(previewError$ | async) as error">
+          <nz-alert [nzType]="'error'" [nzMessage]="'Erreur de chargement : ' + error.message" nzShowIcon />
+        </p>
+      </ng-template>
+    </nz-card>
+  </ng-template>
+
+</nz-card>
     </div>
 </div>
 
